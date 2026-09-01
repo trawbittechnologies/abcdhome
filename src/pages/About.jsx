@@ -103,7 +103,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8 text-white">
                   <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red mb-2">Our Foundation</p>
-                  <h3 className="text-2xl md:text-3xl font-display font-semibold">Bridging the drawing board with the construction site.</h3>
+                  <h2 className="text-2xl md:text-3xl font-display font-semibold">Bridging the drawing board with the construction site.</h2>
                 </div>
               </div>
 
@@ -192,9 +192,9 @@ const About = () => {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red mb-2">Visit Our Studio</p>
-              <h3 className="text-3xl md:text-4xl font-display font-semibold text-white">
+              <h2 className="text-3xl md:text-4xl font-display font-semibold text-white">
                 Located in Cherkala – Kanhangad, Kerala.
-              </h3>
+              </h2>
             </div>
             <Link
               to="/contact"

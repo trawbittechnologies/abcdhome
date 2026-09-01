@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/layout/Layout';
-import LoadingScreen from './components/layout/LoadingScreen';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
@@ -34,19 +32,10 @@ const AnimatedRoutes = () => {
 };
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <LoadingScreen onComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
-      <Router>
-        <AnimatedRoutes />
-      </Router>
-    </>
+    <Router>
+      <AnimatedRoutes />
+    </Router>
   );
 }
 

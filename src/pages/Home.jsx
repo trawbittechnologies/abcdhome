@@ -45,12 +45,10 @@ const Home = () => {
 
 
         {/* ── Main hero content ── */}
-        <div className="relative z-10 flex-1 flex flex-col justify-between w-full max-w-7xl mx-auto px-6 md:px-12 pt-52 pb-12">
-
-
+        <div className="relative z-10 flex-1 flex flex-col justify-between w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 sm:pt-44 md:pt-48 pb-12">
 
           {/* Headline */}
-          <div className="py-12">
+          <div className="py-6 sm:py-10">
             <motion.div
               className="overflow-hidden mb-6"
               variants={textRevealContainer}
@@ -58,7 +56,7 @@ const Home = () => {
               animate="visible"
             >
               <motion.h1
-                className="text-6xl md:text-8xl xl:text-[8.5rem] font-display font-semibold leading-[1.0] tracking-tight"
+                className="text-5xl sm:text-7xl md:text-8xl xl:text-[8.5rem] font-display font-semibold leading-[1.0] tracking-tight"
                 variants={textRevealChild}
               >
                 <span className="text-white block">We build</span>
@@ -68,57 +66,51 @@ const Home = () => {
             </motion.div>
 
             <motion.p
-              className="text-base md:text-lg font-light text-white/50 max-w-md leading-relaxed"
+              className="text-base sm:text-lg font-light text-white/70 max-w-lg leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.0, duration: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
             >
-              A premium design-build studio — architecture, interiors, and construction delivered as one seamless experience.
+              A premium design-build studio — architecture, interiors, and construction delivered as one seamless experience in Cherkala – Kanhangad, Kerala.
             </motion.p>
           </div>
 
-          {/* Bottom row: CTAs + Stats */}
+          {/* Bottom row: Streamlined CTAs + Stats */}
           <motion.div
             className="flex flex-col gap-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
           >
-            {/* CTA buttons */}
-            <div className="flex flex-wrap gap-3">
+            {/* Streamlined CTA buttons: Primary project inquiry + Secondary explore */}
+            <div className="flex flex-wrap items-center gap-3.5">
               <Link
-                to="/projects"
-                className="group inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red-dark px-7 py-3.5 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase shadow-glass-red transition-all duration-300"
+                to="/contact"
+                className="group inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red-dark px-8 py-4 rounded-full text-white text-xs font-bold tracking-[0.2em] uppercase shadow-glass-red transition-all duration-300 transform hover:-translate-y-0.5"
               >
-                EXPLORE WORK
+                <span>START A PROJECT</span>
                 <span className="transform group-hover:translate-x-1 transition-transform">→</span>
               </Link>
               <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 px-7 py-3.5 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300"
+                to="/projects"
+                className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 px-8 py-4 rounded-full text-white text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:border-white/40"
               >
-                START A PROJECT
-              </Link>
-              <Link
-                to="/gallery"
-                className="inline-flex items-center gap-3 hover:bg-white/10 border border-white/10 hover:border-white/25 px-7 py-3.5 rounded-full text-white/60 hover:text-white text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300"
-              >
-                VIEW GALLERY
+                EXPLORE WORK
               </Link>
             </div>
 
-            {/* Stats — horizontal dividers, no card boxes */}
+            {/* Stats — horizontal dividers */}
             <div className="flex items-center gap-0 border-t border-white/10 pt-8">
               {stats.map((s, i) => (
-                <div key={s.label} className={`flex-1 ${i !== 0 ? 'border-l border-white/10 pl-8' : ''} ${i !== stats.length - 1 ? 'pr-8' : ''}`}>
-                  <p className="text-4xl md:text-5xl font-display font-semibold text-white mb-1">{s.value}</p>
-                  <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/40">{s.label}</p>
+                <div key={s.label} className={`flex-1 ${i !== 0 ? 'border-l border-white/10 pl-6 sm:pl-8' : ''} ${i !== stats.length - 1 ? 'pr-6 sm:pr-8' : ''}`}>
+                  <p className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-white mb-1">{s.value}</p>
+                  <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/50">{s.label}</p>
                 </div>
               ))}
               {/* Scroll indicator */}
               <div className="hidden md:flex flex-col items-center gap-2 pl-8 border-l border-white/10">
                 <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
-                <span className="text-[9px] font-bold tracking-[0.3em] uppercase text-white/30 rotate-90 mt-2 whitespace-nowrap">SCROLL</span>
+                <span className="text-[9px] font-bold tracking-[0.3em] uppercase text-white/40 rotate-90 mt-2 whitespace-nowrap">SCROLL</span>
               </div>
             </div>
 

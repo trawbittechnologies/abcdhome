@@ -80,7 +80,7 @@ const StudioIntro = () => {
                   <MapPin size={14} />
                   <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white">Cherkala – Kanhangad</span>
                 </div>
-                <h4 className="text-xl md:text-2xl font-display font-semibold text-white">Architecture · Interior · Turnkey</h4>
+                <h3 className="text-xl md:text-2xl font-display font-semibold text-white">Architecture · Interior · Turnkey</h3>
               </div>
               <span className="text-xs font-semibold uppercase tracking-widest text-white/60 hidden sm:block">Kerala, India</span>
             </div>

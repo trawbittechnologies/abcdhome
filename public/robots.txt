@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abcdhome-pied.vercel.app/sitemap.xml

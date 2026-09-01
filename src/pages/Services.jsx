@@ -190,7 +190,7 @@ const Services = () => {
 
                         {/* Deliverables Checklist */}
                         <div>
-                          <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/50 mb-4">Key Deliverables</h4>
+                          <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/50 mb-4">Key Deliverables</h3>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {service.deliverables.map((item) => (
                               <div key={item} className="flex items-start gap-2.5 p-3 rounded-xl bg-brand-gray-light/80 border border-brand-blue/5">

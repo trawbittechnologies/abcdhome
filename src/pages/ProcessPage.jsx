@@ -161,7 +161,7 @@ const ProcessPage = () => {
                         </p>
 
                         <div>
-                          <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/40 mb-3">Deliverables & Milestones</h4>
+                          <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/40 mb-3">Deliverables & Milestones</h3>
                           <div className="space-y-2.5">
                             {step.deliverables.map((item) => (
                               <div key={item} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FAFBFF] border border-brand-blue/10">

@@ -110,7 +110,7 @@ const Contact = () => {
                     <MapPin size={22} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Studio Headquarters</h4>
+                    <h3 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Studio Headquarters</h3>
                     <p className="text-sm font-light text-brand-blue/70 leading-relaxed">
                       Cherkala – Kanhangad Highway,<br />Kasaragod District, Kerala 671315
                     </p>
@@ -122,7 +122,7 @@ const Contact = () => {
                     <Mail size={22} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Direct Inquiries</h4>
+                    <h3 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Direct Inquiries</h3>
                     <a href="mailto:info@abcdstudio.com" className="text-sm font-medium text-brand-blue hover:text-brand-red transition-colors block">
                       info@abcdstudio.com
                     </a>
@@ -135,7 +135,7 @@ const Contact = () => {
                     <Phone size={22} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Call / WhatsApp</h4>
+                    <h3 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Call / WhatsApp</h3>
                     <a href="tel:+910000000000" className="text-sm font-medium text-brand-blue hover:text-brand-red transition-colors block">
                       +91 (0) 000 000 0000
                     </a>

@@ -152,7 +152,7 @@ const ProjectDetail = () => {
             
             {/* Left: Project Specs Matrix */}
             <div className="lg:col-span-4 space-y-8">
-              <h3 className="text-xs font-bold tracking-[0.25em] uppercase text-brand-red">Project Data</h3>
+              <h2 className="text-xs font-bold tracking-[0.25em] uppercase text-brand-red">Project Data</h2>
               
               <div className="space-y-6">
                 {[
@@ -203,7 +203,7 @@ const ProjectDetail = () => {
                 ].map((item) => (
                   <div key={item.title} className="p-6 rounded-2xl bg-brand-gray-light/60 border border-brand-blue/10">
                     <CheckCircle2 size={20} className="text-brand-red mb-3" />
-                    <h4 className="text-base font-semibold text-brand-blue mb-1">{item.title}</h4>
+                    <h3 className="text-base font-semibold text-brand-blue mb-1">{item.title}</h3>
                     <p className="text-xs font-light text-brand-blue/70 leading-relaxed">{item.desc}</p>
                   </div>
                 ))}

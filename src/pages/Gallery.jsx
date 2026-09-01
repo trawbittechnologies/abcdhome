@@ -177,9 +177,9 @@ const Gallery = () => {
                     <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-blue bg-white px-3.5 py-1 rounded-full mb-3 inline-block shadow-sm">
                       {currentCategoryData.subtitle}
                     </span>
-                    <h3 className="text-2xl md:text-4xl font-display font-semibold text-white">
+                    <h2 className="text-2xl md:text-4xl font-display font-semibold text-white">
                       {currentItem.title}
-                    </h3>
+                    </h2>
                     <p className="text-xs font-light text-white/70 mt-1">{currentItem.location}</p>
                   </div>
 
@@ -245,7 +245,7 @@ const Gallery = () => {
                       />
                     </div>
                     <div className="p-6">
-                      <h4 className="text-xl font-display font-semibold text-brand-blue mb-1">{item.title}</h4>
+                      <h3 className="text-xl font-display font-semibold text-brand-blue mb-1">{item.title}</h3>
                       <p className="text-xs font-light text-brand-blue/60">{item.location}</p>
                     </div>
                   </div>
