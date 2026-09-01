@@ -145,8 +145,8 @@ const LoadingScreen = ({ onComplete }) => {
             />
           </div>
 
-          {/* Tagline reveals at the end of the video with animated word stagger */}
-          <div className="absolute top-[calc(100%+14px)] left-1/2 -translate-x-1/2 whitespace-nowrap">
+          {/* Tagline reveals at the end of the video with animated word stagger and tight elegant gap */}
+          <div className="absolute top-[calc(100%-16px)] sm:top-[calc(100%-22px)] left-1/2 -translate-x-1/2 whitespace-nowrap">
             <AnimatePresence>
               {showTagline && (
                 <motion.div 
