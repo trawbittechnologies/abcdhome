@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import lottie from 'lottie-web';
 
@@ -6,6 +6,7 @@ const LoadingScreen = ({ onComplete }) => {
   const containerRef = useRef(null);
   const animRef = useRef(null);
   const [showTagline, setShowTagline] = useState(false);
+  const [isLottieReady, setIsLottieReady] = useState(false);
 
   useEffect(() => {
     // Disable scrolling while the loading animation is active
@@ -18,10 +19,11 @@ const LoadingScreen = ({ onComplete }) => {
       if (onComplete) onComplete();
     };
 
-    // Safety fallback timer so visitor is never blocked if network is slow
+    // Safety fallback timer so visitor is never permanently stuck even on ultra-slow networks
     const safetyTimer = setTimeout(() => {
-      finishLoading();
-    }, 3800);
+      setShowTagline(true);
+      setTimeout(finishLoading, 900);
+    }, 4800);
 
     if (containerRef.current) {
       try {
@@ -37,28 +39,39 @@ const LoadingScreen = ({ onComplete }) => {
           },
         });
 
-        // Trigger the text animation towards the end of the video (at frame 170 / ~75% of video)
+        animRef.current.addEventListener('DOMLoaded', () => {
+          setIsLottieReady(true);
+        });
+
+        // Trigger the tagline animation towards the end of the animation
         animRef.current.addEventListener('enterFrame', (e) => {
-          if (e.currentTime >= 170) {
+          if (e.currentTime >= 130 || (animRef.current && animRef.current.totalFrames && e.currentTime >= animRef.current.totalFrames * 0.65)) {
             setShowTagline(true);
           }
         });
 
-        // When video finishes, allow a brief graceful hold so the text & logo are admired, then transition
+        // When animation finishes, hold briefly so the logo & text are admired, then transition smoothly
         animRef.current.addEventListener('complete', () => {
           setShowTagline(true);
           setTimeout(() => {
             finishLoading();
-          }, 700);
+          }, 800);
         });
 
         animRef.current.addEventListener('data_failed', () => {
-          console.warn('Lottie failed to load');
-          finishLoading();
+          console.warn('Lottie data loading failed, using elegant fallback');
+          setShowTagline(true);
+          setTimeout(finishLoading, 1600);
+        });
+
+        animRef.current.addEventListener('error', () => {
+          setShowTagline(true);
+          setTimeout(finishLoading, 1600);
         });
       } catch (err) {
         console.error('Error loading Lottie animation:', err);
-        finishLoading();
+        setShowTagline(true);
+        setTimeout(finishLoading, 1600);
       }
     }
 
@@ -135,17 +148,30 @@ const LoadingScreen = ({ onComplete }) => {
         }}
         className="absolute inset-0 bg-white z-20 flex items-center justify-center pointer-events-auto"
       >
-        {/* Fixed position centered container - No zoom out / No scale change */}
+        {/* Fixed position centered container */}
         <div className="relative flex flex-col items-center justify-center">
-          {/* Centered Small Lottie Video with completely fixed position & no zoom */}
-          <div className="w-64 sm:w-80 md:w-96 max-w-[90vw] aspect-video flex items-center justify-center">
+          
+          {/* Centered Lottie Container with instant placeholder to prevent any flash */}
+          <div className="w-64 sm:w-80 md:w-96 max-w-[90vw] aspect-video flex items-center justify-center relative">
+            
+            {/* Smooth logo placeholder if Lottie is buffering */}
+            {!isLottieReady && (
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <img
+                  src="/abcd(logo)final (1).png"
+                  alt="ABCD Logo"
+                  className="h-14 sm:h-16 w-auto object-contain animate-pulse opacity-70"
+                />
+              </div>
+            )}
+
             <div 
               ref={containerRef} 
-              className="w-full h-full flex items-center justify-center [&>canvas]:w-full [&>canvas]:h-full [&>canvas]:object-contain"
+              className={`w-full h-full flex items-center justify-center [&>canvas]:w-full [&>canvas]:h-full [&>canvas]:object-contain transition-opacity duration-300 ${isLottieReady ? 'opacity-100' : 'opacity-0'}`}
             />
           </div>
 
-          {/* Tagline reveals at the end of the video with animated word stagger and tight elegant gap */}
+          {/* Tagline reveals at the end of the animation with animated word stagger */}
           <div className="absolute top-[calc(100%-16px)] sm:top-[calc(100%-22px)] left-1/2 -translate-x-1/2 whitespace-nowrap">
             <AnimatePresence>
               {showTagline && (

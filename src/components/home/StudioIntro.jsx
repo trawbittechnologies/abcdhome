@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Compass, ShieldCheck, Sparkles, MapPin } from 'lucide-react';
+import { ArrowUpRight, Sparkles, MapPin, Award, CheckCircle2 } from 'lucide-react';
 import { fadeUpVariant, imageReveal } from '../../utils/animations';
 
 const StudioIntro = () => {
@@ -10,7 +10,7 @@ const StudioIntro = () => {
         
         {/* Section Header */}
         <div className="flex items-center space-x-3 mb-8">
-          <div className="h-[1px] w-8 bg-brand-red"></div>
+          <div className="h-[2px] w-8 bg-brand-red"></div>
           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">The Studio Philosophy</span>
         </div>
 
@@ -37,7 +37,7 @@ const StudioIntro = () => {
             variants={fadeUpVariant}
           >
             <p className="text-base md:text-lg font-light text-brand-blue/70 leading-relaxed mb-6">
-              ABCD is a contemporary design-build practice in <strong className="font-semibold text-brand-blue">Cherkala – Kanhangad</strong>. By housing architectural drafting and on-site construction under one accountable team, we ensure what is envisioned on paper is built with millimeter precision.
+              ABCD is a contemporary design-build practice in <strong className="font-semibold text-brand-blue">Cherkala – Kanhangad</strong>. By housing architectural drafting, custom woodwork, and on-site engineering under one accountable team, we ensure what is envisioned on paper is built with millimeter precision.
             </p>
             <Link
               to="/about"
@@ -61,13 +61,15 @@ const StudioIntro = () => {
           >
             <motion.div className="absolute inset-0" variants={imageReveal}>
               <img 
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" 
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&fm=webp&q=80" 
                 alt="ABCD Contemporary Architecture in Kerala"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </motion.div>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/80 via-black/10 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/85 via-black/15 to-transparent"></div>
             
             {/* Studio Location Overlay Pill */}
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white z-10">
@@ -78,7 +80,7 @@ const StudioIntro = () => {
                 </div>
                 <h3 className="text-xl md:text-2xl font-display font-semibold text-white">Architecture · Interior · Turnkey</h3>
               </div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-white/60 hidden sm:block">Kerala, India</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-white/75 hidden sm:block">Kerala, India</span>
             </div>
           </motion.div>
 
@@ -88,8 +90,10 @@ const StudioIntro = () => {
             {/* Secondary Teak Wood / Joinery Visual */}
             <div className="relative h-60 rounded-3xl overflow-hidden shadow-glass border border-brand-blue/10 bg-brand-gray group">
               <img 
-                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80" 
+                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&fm=webp&q=80" 
                 alt="Bespoke Joinery & Interior Craft"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/70 to-transparent"></div>
@@ -101,13 +105,13 @@ const StudioIntro = () => {
 
             {/* Metric Tiles 2-Col */}
             <div className="grid grid-cols-2 gap-4 flex-1">
-              <div className="p-6 md:p-8 rounded-3xl bg-white border border-brand-blue/10 shadow-glass flex flex-col justify-center">
+              <div className="p-6 md:p-8 rounded-3xl bg-white border border-brand-blue/10 shadow-glass flex flex-col justify-center transition-all hover:border-brand-blue/30">
                 <p className="text-4xl md:text-5xl font-display font-bold text-brand-blue">120+</p>
                 <p className="text-xs font-bold tracking-widest uppercase text-brand-red mt-2">Projects Built</p>
-                <p className="text-[11px] font-light text-brand-blue/60 mt-1">Across Kerala.</p>
+                <p className="text-[11px] font-light text-brand-blue/60 mt-1">Across North Kerala.</p>
               </div>
 
-              <div className="p-6 md:p-8 rounded-3xl bg-brand-blue text-white shadow-glass flex flex-col justify-center">
+              <div className="p-6 md:p-8 rounded-3xl bg-brand-blue text-white shadow-glass flex flex-col justify-center transition-all hover:bg-brand-blue-dark">
                 <p className="text-4xl md:text-5xl font-display font-bold text-white">8+ Yrs</p>
                 <p className="text-xs font-bold tracking-widest uppercase text-brand-red mt-2">Design-Build</p>
                 <p className="text-[11px] font-light text-white/70 mt-1">Single accountability.</p>

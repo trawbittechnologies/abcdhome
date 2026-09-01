@@ -11,7 +11,7 @@ const projects = [
     year: "2024", 
     location: "Kanhangad, Kerala",
     area: "4,800 sq.ft",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&fm=webp&q=80",
     highlight: "Cantilevered waterfront concrete & teak villa."
   },
   { 
@@ -21,7 +21,7 @@ const projects = [
     year: "2023", 
     location: "Cherkala, Kasaragod",
     area: "3,600 sq.ft",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&fm=webp&q=80",
     highlight: "Minimalist steel frame & panoramic double glazing."
   },
   { 
@@ -31,7 +31,7 @@ const projects = [
     year: "2024", 
     location: "Kanhangad, Kerala",
     area: "1,200 sq.ft",
-    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=900&fm=webp&q=80",
     highlight: "Custom acoustic teak joinery with integrated lighting."
   }
 ];
@@ -50,7 +50,7 @@ const SelectedWork = () => {
             variants={fadeUpVariant}
           >
             <div className="flex items-center space-x-3 mb-4">
-              <div className="h-[1px] w-8 bg-brand-red"></div>
+              <div className="h-[2px] w-8 bg-brand-red"></div>
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">Selected Projects</span>
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold text-brand-blue leading-[1.05] tracking-tight">
@@ -68,7 +68,7 @@ const SelectedWork = () => {
               to="/projects" 
               className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue hover:text-brand-red transition-all duration-300 pb-1 border-b border-brand-blue/20 hover:border-brand-red group"
             >
-              <span>View All Projects (6)</span>
+              <span>View All Projects</span>
               <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </motion.div>
@@ -94,6 +94,8 @@ const SelectedWork = () => {
                     <img
                       src={project.image}
                       alt={project.name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                     />
                   </motion.div>
@@ -106,7 +108,7 @@ const SelectedWork = () => {
                   </div>
 
                   {/* Year */}
-                  <div className="absolute top-4 right-4 z-10 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-semibold tracking-wider">
+                  <div className="absolute top-4 right-4 z-10 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-semibold tracking-wider">
                     {project.year}
                   </div>
 

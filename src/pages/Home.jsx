@@ -1,19 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowRight, MessageSquare, Compass, ShieldCheck, Sparkles, Building2 } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
-import { fadeUpVariant, textRevealContainer, textRevealChild } from '../utils/animations';
+import { textRevealContainer, textRevealChild } from '../utils/animations';
 import StudioIntro from '../components/home/StudioIntro';
 import SelectedWork from '../components/home/SelectedWork';
 import Practice from '../components/home/Practice';
 import FeaturedProject from '../components/home/FeaturedProject';
 import ContactCTA from '../components/home/ContactCTA';
-
-const stats = [
-  { value: '120+', label: 'Homes Delivered' },
-  { value: '8+ Yrs', label: 'Master Craft' },
-  { value: '100%', label: 'Peace of Mind' },
-];
 
 const Home = () => {
   useEffect(() => {
@@ -24,8 +19,8 @@ const Home = () => {
   const { scrollY } = useScroll();
 
   // Subtle fade & text parallax as the content layer scrolls over it
-  const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.2]);
-  const heroTextY = useTransform(scrollY, [0, 500], [0, -40]);
+  const heroTextOpacity = useTransform(scrollY, [0, 450], [1, 0.2]);
+  const heroTextY = useTransform(scrollY, [0, 450], [0, -35]);
   const videoOverlayOpacity = useTransform(scrollY, [0, 600], [0.65, 0.85]);
 
   return (
@@ -36,10 +31,15 @@ const Home = () => {
           ref={heroRef}
           className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden z-0"
         >
-          {/* Full-bleed Video Background (No gaps, 100% pinned) */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Full-bleed Video Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden bg-brand-black">
             <video 
-              autoPlay loop muted playsInline
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              preload="auto"
+              disablePictureInPicture
               className="w-full h-full object-cover scale-105"
             >
               <source src="/Transform_video_into_architectur…_202609011258.mp4" type="video/mp4" />
@@ -47,9 +47,9 @@ const Home = () => {
             {/* Dynamic dimming overlay as user scrolls down */}
             <motion.div 
               style={{ opacity: videoOverlayOpacity }}
-              className="absolute inset-0 bg-black"
+              className="absolute inset-0 bg-black/60 pointer-events-none"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20 pointer-events-none" />
           </div>
 
           {/* ── Main hero content with subtle upward fade ── */}
@@ -62,14 +62,14 @@ const Home = () => {
               
               {/* Architectural Sub-header */}
               <motion.div 
-                className="flex items-center gap-3"
+                className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20"
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <div className="w-8 h-[2px] bg-brand-red"></div>
-                <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase text-white/80">
-                  Architecture · Interiors · Construction
+                <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
+                <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-white/90">
+                  Architecture · Interiors · Turnkey Construction
                 </span>
               </motion.div>
 
@@ -99,7 +99,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
-                We design and build enduring homes with care, craft, and total dedication. From initial sketches to the day you step inside — one trusted team by your side every step of the way.
+                We design and build enduring homes in Cherkala – Kanhangad with care, craft, and total dedication. From initial blueprints to the day you step inside — one trusted team by your side every step of the way.
               </motion.p>
 
               {/* Action Buttons Row */}
@@ -114,7 +114,7 @@ const Home = () => {
                   className="group inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red-dark px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-white text-xs font-bold tracking-[0.2em] uppercase shadow-glass-red transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   <span>START YOUR PROJECT</span>
-                  <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                  <ArrowRight size={15} className="transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </Link>
 
                 <Link
@@ -125,12 +125,13 @@ const Home = () => {
                 </Link>
 
                 <a
-                  href="https://wa.me/919000000000?text=Hi%20ABCD%20Studio%2C%20I%20am%20interested%20in%20discussing%20a%20project"
+                  href="https://wa.me/919999999999?text=Hi%20ABCD%20Studio%2C%20I%20would%20like%20to%20consult%20about%20a%20new%20project."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/35 text-[#25D366] hover:text-white text-xs font-bold tracking-wider uppercase transition-all backdrop-blur-md"
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/40 text-[#25D366] hover:text-white text-xs font-bold tracking-wider uppercase transition-all backdrop-blur-md shadow-sm"
                 >
-                  <span>💬 WhatsApp Us</span>
+                  <MessageSquare size={15} />
+                  <span>WhatsApp Us</span>
                 </a>
               </motion.div>
             </div>
@@ -148,7 +149,7 @@ const Home = () => {
                     <p className="text-2xl sm:text-4xl md:text-5xl font-display font-semibold text-white tracking-tight">120+</p>
                     <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] uppercase text-white/60 mt-1">Homes Delivered</p>
                   </div>
-                  <div className="border-l border-white/15 pl-3 sm:pl-6 pr-3 sm:pr-6">
+                  <div className="border-l border-white/15 pl-3 sm:pr-6 pr-3 sm:pl-6">
                     <p className="text-2xl sm:text-4xl md:text-5xl font-display font-semibold text-white tracking-tight">8+ Yrs</p>
                     <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] uppercase text-white/60 mt-1">Master Craft</p>
                   </div>
@@ -160,7 +161,7 @@ const Home = () => {
 
                 {/* Scroll prompt */}
                 <div className="hidden md:flex flex-col items-center gap-2 pl-6 border-l border-white/15">
-                  <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse"></div>
+                  <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse" />
                   <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-white/40 rotate-90 mt-2 whitespace-nowrap">SCROLL</span>
                 </div>
               </div>
