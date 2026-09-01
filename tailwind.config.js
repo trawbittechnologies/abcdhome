@@ -18,8 +18,9 @@ export default {
         'brand-black': '#0d1117',
       },
       fontFamily: {
-        sans: ['Manrope', 'sans-serif'],
-        display: ['"Cormorant Garamond"', 'serif'],
+        sans: ['Manrope', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Cormorant Garamond"', '"DM Serif Display"', 'Georgia', 'serif'],
+        serif: ['"Cormorant Garamond"', '"DM Serif Display"', 'serif'],
       },
       backdropBlur: {
         xs: '2px',
