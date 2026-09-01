@@ -5,11 +5,7 @@ import { fadeUpVariant, imageReveal } from '../../utils/animations';
 
 const StudioIntro = () => {
   return (
-    <section className="py-28 md:py-40 px-6 md:px-12 bg-[#FAFBFF] relative overflow-hidden border-b border-brand-blue/10">
-      
-      {/* Subtle architectural background line */}
-      <div className="absolute top-0 right-1/3 w-[1px] h-full bg-brand-blue/5 pointer-events-none"></div>
-
+    <section className="py-24 md:py-36 px-6 md:px-12 bg-transparent relative overflow-hidden border-b border-brand-blue/10">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
