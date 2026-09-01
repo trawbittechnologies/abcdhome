@@ -108,7 +108,7 @@ const StudioIntro = () => {
               <div className="p-6 md:p-8 rounded-3xl bg-white border border-brand-blue/10 shadow-glass flex flex-col justify-center">
                 <p className="text-4xl md:text-5xl font-display font-bold text-brand-blue">120+</p>
                 <p className="text-xs font-bold tracking-widest uppercase text-brand-red mt-2">Projects Built</p>
-                <p className="text-[11px] font-light text-brand-blue/60 mt-1">Across North Kerala.</p>
+                <p className="text-[11px] font-light text-brand-blue/60 mt-1">Across Kerala.</p>
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl bg-brand-blue text-white shadow-glass flex flex-col justify-center">

@@ -18,6 +18,11 @@ const LoadingScreen = ({ onComplete }) => {
       if (onComplete) onComplete();
     };
 
+    // Safety fallback timer so visitor is never blocked if network is slow
+    const safetyTimer = setTimeout(() => {
+      finishLoading();
+    }, 3800);
+
     if (containerRef.current) {
       try {
         animRef.current = lottie.loadAnimation({
@@ -44,7 +49,7 @@ const LoadingScreen = ({ onComplete }) => {
           setShowTagline(true);
           setTimeout(() => {
             finishLoading();
-          }, 800);
+          }, 700);
         });
 
         animRef.current.addEventListener('data_failed', () => {
@@ -58,6 +63,7 @@ const LoadingScreen = ({ onComplete }) => {
     }
 
     return () => {
+      clearTimeout(safetyTimer);
       document.body.style.overflow = '';
       if (animRef.current) {
         animRef.current.destroy();
@@ -98,7 +104,11 @@ const LoadingScreen = ({ onComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[99999] pointer-events-none overflow-hidden select-none">
+    <motion.div 
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 1, transition: { duration: 1.0 } }}
+      className="fixed inset-0 z-[99999] pointer-events-none overflow-hidden select-none"
+    >
       {/* Secondary trailing architectural accent curtain for depth */}
       <motion.div
         initial={{ y: '0%' }}
@@ -160,7 +170,7 @@ const LoadingScreen = ({ onComplete }) => {
         {/* Bottom glowing accent line on shutter edge */}
         <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-blue via-brand-red to-brand-blue opacity-90" />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

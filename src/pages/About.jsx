@@ -8,7 +8,7 @@ import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal } from
 const milestones = [
   { year: "2016", title: "Foundation in Kasaragod", desc: "ABCD was established with a singular vision: bringing uncompromised architectural design and turnkey construction together." },
   { year: "2019", title: "In-House Wood & Joinery Studio", desc: "Launched dedicated bespoke carpentry operations in Cherkala to craft signature teak and hardwood millwork." },
-  { year: "2021", title: "100+ Completed Projects", desc: "Crossed a landmark milestone of delivering bespoke villas, modern residences, and commercial facilities across North Kerala." },
+  { year: "2021", title: "100+ Completed Projects", desc: "Crossed a landmark milestone of delivering bespoke villas, modern residences, and commercial facilities across Kerala." },
   { year: "2024", title: "The Next Era of Design-Build", desc: "Expanding into sustainable parametric architecture, intelligent spatial engineering, and luxury coastal retreats." },
 ];
 
