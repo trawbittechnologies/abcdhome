@@ -5,9 +5,10 @@ import { ArrowRight } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
 import { textRevealContainer, textRevealChild } from '../utils/animations';
 import StudioIntro from '../components/home/StudioIntro';
-import SelectedWork from '../components/home/SelectedWork';
-import Practice from '../components/home/Practice';
+import WorkSlider from '../components/home/WorkSlider';
 import FeaturedProject from '../components/home/FeaturedProject';
+import KeyHandover from '../components/home/KeyHandover';
+import Practice from '../components/home/Practice';
 import ContactCTA from '../components/home/ContactCTA';
 
 const Home = () => {
@@ -188,8 +189,9 @@ const Home = () => {
         {/* ── OVERLAY LAYER SCROLLING ON TOP OF HERO (Z-10) ── */}
         <div className="relative z-10 rounded-t-[36px] sm:rounded-t-[54px] bg-[#FAFBFF] page-bg overflow-hidden shadow-[0_-30px_70px_rgba(0,0,0,0.5)] border-t border-white/60 min-h-screen">
           <StudioIntro />
-          <SelectedWork />
+          <WorkSlider />
           <FeaturedProject />
+          <KeyHandover />
           <Practice />
           <ContactCTA />
         </div>

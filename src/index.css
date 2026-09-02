@@ -10,7 +10,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     background-color: #FAFBFF;
     color: #233777;
@@ -18,7 +18,13 @@
     @apply antialiased overflow-x-hidden;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-display {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-display {
     font-family: 'Manrope', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     @apply tracking-tight;
   }
@@ -30,23 +36,31 @@
 }
 
 @layer components {
+
   /* Glassmorphism card */
   .glass {
-    @apply bg-white/60 backdrop-blur-xl border border-white/70 shadow-[0_8px_32px_rgba(35,55,119,0.08)];
+    @apply bg-white/60 backdrop-blur-xl border border-white/70 shadow-glass;
   }
+
   .glass-dark {
-    @apply bg-brand-blue/30 backdrop-blur-xl border border-brand-blue/20 shadow-[0_8px_32px_rgba(0,0,0,0.15)];
+    @apply bg-brand-blue/30 backdrop-blur-xl border border-brand-blue/20;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   }
+
   .glass-sm {
-    @apply bg-white/50 backdrop-blur-md border border-white/60 shadow-[0_4px_16px_rgba(35,55,119,0.06)];
+    @apply bg-white/50 backdrop-blur-md border border-white/60;
+    box-shadow: 0 4px 16px rgba(35, 55, 119, 0.06);
   }
+
   /* Section label */
   .section-label {
     @apply flex items-center space-x-4 mb-8;
   }
+
   .section-label span:first-child {
     @apply h-[1px] w-10 bg-brand-red block;
   }
+
   .section-label span:last-child {
     @apply text-[10px] font-semibold tracking-[0.25em] uppercase text-brand-blue/50;
   }
@@ -56,12 +70,49 @@
   .text-balance {
     text-wrap: balance;
   }
+
   .hero-gradient {
-    background: radial-gradient(ellipse at 70% 50%, rgba(35,55,119,0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 10% 80%, rgba(238,42,36,0.08) 0%, transparent 50%),
-                linear-gradient(135deg, #e8eef8 0%, #f0f4ff 50%, #f5f0f0 100%);
+    background: radial-gradient(ellipse at 70% 50%, rgba(35, 55, 119, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 10% 80%, rgba(238, 42, 36, 0.08) 0%, transparent 50%),
+      linear-gradient(135deg, #e8eef8 0%, #f0f4ff 50%, #f5f0f0 100%);
   }
+
   .page-bg {
     background: linear-gradient(135deg, #e8eef8 0%, #f0f4ff 60%, #f5f0f0 100%);
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 35s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover,
+  .group-hover-pause:hover .animate-marquee,
+  .group-hover-pause:hover .animate-marquee-reverse {
+    animation-play-state: paused;
   }
 }

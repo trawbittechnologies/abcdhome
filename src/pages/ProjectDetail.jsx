@@ -1,56 +1,105 @@
 import { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, MapPin, Calendar, Layers, Maximize } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, Layers } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
-import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal, staggerContainer, fadeUpStaggerVariant } from '../utils/animations';
+import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal } from '../utils/animations';
 import { allProjectsData } from './Projects';
 
 const projectGalleryMap = {
-  "1": [
-    { src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80", caption: "Main Waterfront Elevation" },
-    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80", caption: "Twilight Exterior Landscape" },
-    { src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80", caption: "Primary Master Sanctuary" },
-    { src: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80", caption: "Executive Private Study" },
+  "kbr-residence": [
+    { src: "/exterior/kbr.png", caption: "Cantilevered Facade & Warm Soffit Lighting" },
+    { src: "/interior/living01.png", caption: "Double Height Living Sanctuary" },
+    { src: "/interior/bed02.png", caption: "Master Sanctuary & Vertical Teak Paneling" },
+    { src: "/interior/kitchen03.png", caption: "Modular Kitchen & Quartz Island Counter" },
+    { src: "/exterior/PHOTO-2024-05-10-17-56-20%2016.jpg.jpeg", caption: "Completed Facade Daylight" }
   ],
-  "2": [
-    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80", caption: "Steel & Glass Structural Facade" },
-    { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80", caption: "Garden Courtyard Integration" },
-    { src: "https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?auto=format&fit=crop&w=1600&q=80", caption: "Precision Reinforced Construction" },
+  "subhash-residence": [
+    { src: "/exterior/subhashlandscape.png", caption: "Tropical Residence Landscape & Massing" },
+    { src: "/exterior/subhash1.png", caption: "Double-Height Glass Entrance Volume" },
+    { src: "/interior/ffliving01.png", caption: "First Floor Family Lounge" },
+    { src: "/interior/dining.png", caption: "Teak Dining Hall & Joinery" }
   ],
-  "3": [
-    { src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80", caption: "Bespoke Teak Headboard Joinery" },
-    { src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80", caption: "Secondary Suite Natural Light" },
-    { src: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80", caption: "Meditative Sanctuary Detail" },
+  "mustafa-villa": [
+    { src: "/exterior/mustafa.png", caption: "Monolithic Cuboid Villa Facade" },
+    { src: "/interior/bed03.png", caption: "Modern Bedroom Interior" },
+    { src: "/interior/001.jpg%20(1)%20-%20Copy.jpeg", caption: "Grand Chandelier Living Hall" },
+    { src: "/exterior/IMG_4038.JPG.jpeg", caption: "Powder Coated Structural Glazing" }
   ],
-  "4": [
-    { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80", caption: "Timber Cladding & Stone Masonry" },
-    { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80", caption: "Site Foundation Progress" },
-    { src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80", caption: "Exterior Completed Profile" },
+  "farook-residence": [
+    { src: "/exterior/farook.png", caption: "Sculptural Waterfront Elevation" },
+    { src: "/interior/ffliving02.png", caption: "Veneer Paneling & TV Console" },
+    { src: "/interior/bed1.png", caption: "Custom Teak Bed Joinery" }
   ],
-  "5": [
-    { src: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80", caption: "Fluted Wall Paneling & Lighting" },
-    { src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80", caption: "Material Transitions" },
-    { src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80", caption: "Lounge & Library View" },
+  "ashith-berka": [
+    { src: "/exterior/ashithberka.png", caption: "Dual Carport & Geometric Massing" },
+    { src: "/interior/ffliving03.png", caption: "Drop Ceiling Rafters & Lighting" },
+    { src: "/interior/dining.png", caption: "Formal Teak Dining Pavilion" }
   ],
-  "6": [
-    { src: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1600&q=80", caption: "Full Facade Architecture" },
-    { src: "https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?auto=format&fit=crop&w=1600&q=80", caption: "Structural Steel Framing" },
-    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80", caption: "Completed Street Front" },
+  "bachi-residence": [
+    { src: "/exterior/bachi.png", caption: "Front Elevation & Textured Stone Masonry" },
+    { src: "/exterior/Bachi1.png", caption: "Aerial Perspective & Layered Roofline" },
+    { src: "/exterior/bachiright.png", caption: "Cantilevered Master Balcony" },
+    { src: "/interior/bed02.1.png", caption: "Master Fluted Woodwork & Brass Pendants" }
   ],
+  "commercial-studio": [
+    { src: "/exterior/commercial.png", caption: "Commercial Studio Street Elevation" },
+    { src: "/exterior/IMG_4038.JPG.jpeg", caption: "Powder Coated Structural Glazing" },
+    { src: "/exterior/IMG_4031.JPG.jpeg", caption: "RCC Column & Slab Framing" },
+    { src: "/interior/studyroom1.png", caption: "Studio Workspace & Architectural Library" }
+  ],
+  "living-sanctuary": [
+    { src: "/interior/living01.png", caption: "Ground Floor Living & Italian Marble" },
+    { src: "/interior/ffliving01.png", caption: "Upper Family Living Lounge" },
+    { src: "/interior/ffliving02.png", caption: "Veneer Paneling & TV Console" },
+    { src: "/interior/001.jpg%20(1)%20-%20Copy.jpeg", caption: "Grand Chandelier Living Hall" }
+  ],
+  "master-suites": [
+    { src: "/interior/bed02.png", caption: "Bespoke Teak Headboard Suite" },
+    { src: "/interior/bed02.1.png", caption: "Brass Pendants & Fluted Detail" },
+    { src: "/interior/bed1.png", caption: "Upholstered Headboard & Wardrobes" },
+    { src: "/interior/007.jpg%20(1).jpeg", caption: "Walk-in Wardrobe & Smoked Glass" }
+  ],
+  "modular-kitchen": [
+    { src: "/interior/kitchen03.png", caption: "Modular Island Countertop" },
+    { src: "/interior/dining.png", caption: "Formal Teak Dining Setup" },
+    { src: "/interior/PHOTO-2024-05-10-17-56-20%204.jpg%20(2).jpeg", caption: "Finished Dining Real Photo" }
+  ],
+  "rcc-civil-execution": [
+    { src: "/exterior/IMG_4031.JPG.jpeg", caption: "Column Shuttering & Concrete Pour" },
+    { src: "/exterior/IMG_4033.JPG.jpeg", caption: "Solid Block Masonry Alignment" },
+    { src: "/exterior/IMG_4035.JPG.jpeg", caption: "Exterior Waterproof Plastering" },
+    { src: "/exterior/IMG_4049.JPG.jpeg", caption: "Polyurethane Roof Waterproofing" }
+  ]
 };
+
+// Aliases for backwards compatibility
+projectGalleryMap["1"] = projectGalleryMap["kbr-residence"];
+projectGalleryMap["2"] = projectGalleryMap["subhash-residence"];
+projectGalleryMap["3"] = projectGalleryMap["mustafa-villa"];
+projectGalleryMap["4"] = projectGalleryMap["farook-residence"];
+projectGalleryMap["5"] = projectGalleryMap["ashith-berka"];
+projectGalleryMap["6"] = projectGalleryMap["bachi-residence"];
+projectGalleryMap["7"] = projectGalleryMap["commercial-studio"];
+projectGalleryMap["8"] = projectGalleryMap["living-sanctuary"];
+projectGalleryMap["9"] = projectGalleryMap["master-suites"];
+projectGalleryMap["10"] = projectGalleryMap["modular-kitchen"];
+projectGalleryMap["11"] = projectGalleryMap["rcc-civil-execution"];
 
 const ProjectDetail = () => {
   const { id, slug } = useParams();
   const activeId = id || slug;
-  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeId]);
 
-  const project = allProjectsData.find(p => p.id === activeId) || allProjectsData[0];
-  const gallery = projectGalleryMap[project.id] || projectGalleryMap["1"];
+  const project = allProjectsData.find((p, idx) =>
+    p.id === activeId ||
+    p.number === activeId ||
+    String(idx + 1) === activeId
+  ) || allProjectsData[0];
+  const gallery = projectGalleryMap[project.id] || projectGalleryMap["kbr-residence"];
 
   const currentIndex = allProjectsData.findIndex(p => p.id === project.id);
   const nextProject = allProjectsData[(currentIndex + 1) % allProjectsData.length];
@@ -59,194 +108,156 @@ const ProjectDetail = () => {
   return (
     <PageTransition>
       <div className="bg-[#FAFBFF] text-brand-blue min-h-screen">
-        
-        {/* Navigation Bar Strip */}
-        <div className="pt-36 md:pt-40 px-6 md:px-12 max-w-7xl mx-auto flex items-center justify-between">
+
+        {/* Minimal Navigation Bar Strip */}
+        <div className="pt-36 md:pt-40 px-6 md:px-12 max-w-6xl mx-auto flex items-center justify-between">
           <Link
             to="/projects"
             className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue/60 hover:text-brand-red transition-colors group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back to all projects</span>
+            <span>All Projects</span>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link
               to={`/projects/${prevProject.id}`}
-              className="w-10 h-10 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 hover:text-white hover:bg-brand-blue transition-all"
+              className="w-9 h-9 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 hover:text-white hover:bg-brand-blue transition-all"
               title="Previous project"
             >
-              <ArrowLeft size={16} />
+              <ArrowLeft size={15} />
             </Link>
             <Link
               to={`/projects/${nextProject.id}`}
-              className="w-10 h-10 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 hover:text-white hover:bg-brand-blue transition-all"
+              className="w-9 h-9 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 hover:text-white hover:bg-brand-blue transition-all"
               title="Next project"
             >
-              <ArrowRight size={16} />
+              <ArrowRight size={15} />
             </Link>
           </div>
         </div>
 
-        {/* Hero Section */}
-        <section className="pt-8 pb-20 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto">
-            
-            {/* Meta Tags */}
-            <motion.div 
-              className="flex flex-wrap items-center gap-4 mb-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="px-3.5 py-1.5 rounded-full bg-brand-red text-white text-[10px] font-bold tracking-[0.2em] uppercase">
+        {/* Minimal Hero Header */}
+        <section className="pt-6 pb-12 px-6 md:px-12">
+          <div className="max-w-6xl mx-auto">
+
+            {/* Meta tags */}
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-bold tracking-[0.2em] uppercase">
                 {project.category}
               </span>
-              <span className="text-xs font-light text-brand-blue/50 flex items-center gap-1.5">
-                <MapPin size={14} className="text-brand-red" />
+              <span className="text-xs text-brand-blue/60 flex items-center gap-1 font-light">
+                <MapPin size={13} className="text-brand-red" />
                 {project.location}
               </span>
-              <span className="text-xs font-light text-brand-blue/50">·</span>
-              <span className="text-xs font-light text-brand-blue/50 flex items-center gap-1.5">
-                <Calendar size={14} className="text-brand-red" />
-                Completed {project.year}
+              <span className="text-brand-blue/30">·</span>
+              <span className="text-xs text-brand-blue/60 flex items-center gap-1 font-light">
+                <Layers size={13} className="text-brand-red" />
+                {project.area}
               </span>
-            </motion.div>
-            
+            </div>
+
             {/* Title */}
-            <motion.div 
-              className="overflow-hidden mb-12"
-              variants={textRevealContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h1 
-                className="text-5xl md:text-7xl lg:text-8xl font-display font-semibold leading-[1.0] tracking-tight"
-                variants={textRevealChild}
-              >
-                {project.name}
-              </motion.h1>
-            </motion.div>
-            
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-semibold text-brand-blue tracking-tight leading-[1.05] mb-8">
+              {project.name}
+            </h1>
+
             {/* Hero Main Image */}
-            <motion.div 
-              className="w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-sm border border-brand-blue/10 relative bg-brand-gray"
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div className="absolute inset-0" variants={imageReveal}>
-                <img 
-                  src={project.image} 
-                  alt={project.name} 
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </motion.div>
+            <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-sm border border-brand-blue/10 bg-brand-gray">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
           </div>
         </section>
 
-        {/* Project Specs & Narrative */}
-        <section className="py-16 md:py-24 px-6 md:px-12 border-y border-brand-blue/10 bg-white">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-            
-            {/* Left: Project Specs Matrix */}
-            <div className="lg:col-span-4 space-y-8">
-              <h2 className="text-xs font-bold tracking-[0.25em] uppercase text-brand-red">Project Data</h2>
-              
-              <div className="space-y-6">
-                {[
-                  { label: "Typology", val: `${project.category} Design & Build` },
-                  { label: "Location", val: project.location },
-                  { label: "Built Area", val: project.area },
-                  { label: "Completion Year", val: project.year },
-                  { label: "Scope of Work", val: "Architecture, Interior Architecture, Turnkey Engineering" },
-                  { label: "Materials", val: "Exposed Concrete, Teak Wood, Structural Steel, Double Glazing" },
-                ].map((spec) => (
-                  <div key={spec.label} className="pb-4 border-b border-brand-blue/10">
-                    <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/40 mb-1">{spec.label}</p>
-                    <p className="text-base font-medium text-brand-blue">{spec.val}</p>
-                  </div>
-                ))}
+        {/* Minimal Narrative & Clean Data */}
+        <section className="py-12 md:py-16 px-6 md:px-12 bg-white border-y border-brand-blue/10">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+
+            {/* Left: Design Narrative */}
+            <div className="md:col-span-8 space-y-4">
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-brand-red block">
+                Overview
+              </span>
+              <p className="text-lg sm:text-xl font-light text-brand-blue/90 leading-relaxed">
+                {project.description}
+              </p>
+              <p className="text-sm font-light text-brand-blue/60 leading-relaxed pt-2">
+                Executed with end-to-end design-build precision by ABCD Studio in Cherkala – Kanhangad, ensuring seamless harmony between structural architecture, natural daylight, and bespoke handcrafted joinery.
+              </p>
+            </div>
+
+            {/* Right: Minimal Specs Column */}
+            <div className="md:col-span-4 bg-[#FAFBFF] p-6 rounded-2xl border border-brand-blue/10 space-y-4">
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-brand-blue/50 block">
+                Specifications
+              </span>
+
+              <div className="space-y-3 text-xs">
+                <div className="flex items-center justify-between pb-2 border-b border-brand-blue/10">
+                  <span className="text-brand-blue/50">Typology</span>
+                  <span className="font-semibold text-brand-blue">{project.category}</span>
+                </div>
+                <div className="flex items-center justify-between pb-2 border-b border-brand-blue/10">
+                  <span className="text-brand-blue/50">Location</span>
+                  <span className="font-semibold text-brand-blue">{project.location}</span>
+                </div>
+                <div className="flex items-center justify-between pb-2 border-b border-brand-blue/10">
+                  <span className="text-brand-blue/50">Built Area</span>
+                  <span className="font-semibold text-brand-blue">{project.area}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-brand-blue/50">Execution</span>
+                  <span className="font-semibold text-brand-red">Turnkey Build</span>
+                </div>
               </div>
 
               <Link
                 to="/contact"
-                className="w-full inline-flex items-center justify-center gap-2 bg-brand-blue text-white hover:bg-brand-red py-4 px-6 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-sm"
+                className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-red text-white py-3 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all duration-300"
               >
-                <span>Inquire About Similar Project</span>
-                <ArrowUpRight size={16} />
+                <span>Inquire About Project</span>
+                <ArrowUpRight size={14} />
               </Link>
-            </div>
-
-            {/* Right: Editorial Narrative */}
-            <div className="lg:col-span-8 space-y-12">
-              <div>
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-blue/40 block mb-4">The Vision</span>
-                <h2 className="text-3xl md:text-4xl font-display font-semibold leading-tight text-brand-blue mb-6">
-                  Balancing tropical climate considerations with bold contemporary minimalism.
-                </h2>
-                <p className="text-lg font-light text-brand-blue/70 leading-relaxed mb-6">
-                  {project.description} The design emphasizes open-plan volume, cross-ventilation, and intentional daylight harvesting to ensure an environment that feels serene and grounded throughout the day.
-                </p>
-                <p className="text-lg font-light text-brand-blue/70 leading-relaxed">
-                  Through ABCD’s integrated design-build methodology, every custom joint, recessed cove, and engineered structural beam was executed with millimeter precision directly by our dedicated on-site team.
-                </p>
-              </div>
-
-              {/* Highlights 3-col */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-brand-blue/10">
-                {[
-                  { title: "Material Truth", desc: "Honest expression of authentic wood and structural elements." },
-                  { title: "Spatial Flow", desc: "Seamless transition between living zones and outdoor landscapes." },
-                  { title: "Turnkey Quality", desc: "Zero compromise from sketch to final structural handover." },
-                ].map((item) => (
-                  <div key={item.title} className="p-6 rounded-2xl bg-brand-gray-light/60 border border-brand-blue/10">
-                    <CheckCircle2 size={20} className="text-brand-red mb-3" />
-                    <h3 className="text-base font-semibold text-brand-blue mb-1">{item.title}</h3>
-                    <p className="text-xs font-light text-brand-blue/70 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
           </div>
         </section>
 
-        {/* Gallery Grid Showcase */}
-        <section className="py-24 md:py-32 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto">
-            
-            <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16">
-              <div>
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red block mb-2">Visual Documentation</span>
-                <h2 className="text-4xl md:text-5xl font-display font-semibold text-brand-blue">
-                  Project Gallery
-                </h2>
-              </div>
-              <p className="text-sm font-light text-brand-blue/60 max-w-sm">
-                High-resolution documentation capturing both structural massing and intimate interior details.
-              </p>
+        {/* Minimal Photo Stream Gallery */}
+        <section className="py-16 md:py-24 px-6 md:px-12">
+          <div className="max-w-6xl mx-auto space-y-8">
+
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-brand-red">
+                Visual Documentation
+              </span>
+              <span className="text-xs font-light text-brand-blue/50">
+                {gallery.length} Photographs
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {gallery.map((img, idx) => (
-                <div 
-                  key={idx} 
-                  className={`group rounded-3xl overflow-hidden border border-brand-blue/10 shadow-sm bg-white flex flex-col ${
-                    idx === 0 ? 'md:col-span-2' : ''
-                  }`}
+                <div
+                  key={idx}
+                  className={`group rounded-2xl overflow-hidden border border-brand-blue/10 bg-white shadow-sm flex flex-col ${idx === 0 ? 'md:col-span-2' : ''
+                    }`}
                 >
-                  <div className={`relative overflow-hidden ${idx === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
-                    <img 
-                      src={img.src} 
-                      alt={img.caption} 
+                  <div className={`relative overflow-hidden bg-brand-gray ${idx === 0 ? 'aspect-[21/10]' : 'aspect-[4/3]'}`}>
+                    <img
+                      src={img.src}
+                      alt={img.caption}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="p-5 md:p-6 flex items-center justify-between border-t border-brand-blue/10">
-                    <p className="text-sm font-display font-semibold text-brand-blue">{img.caption}</p>
-                    <span className="text-[10px] font-bold tracking-widest text-brand-blue/40 uppercase">0{idx + 1}</span>
+                  <div className="p-4 flex items-center justify-between border-t border-brand-blue/10 text-xs">
+                    <span className="font-medium text-brand-blue">{img.caption}</span>
+                    <span className="text-brand-blue/40 font-mono text-[11px]">0{idx + 1}</span>
                   </div>
                 </div>
               ))}
@@ -255,25 +266,23 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* Next Project Footer Bar */}
-        <section className="py-20 px-6 md:px-12 border-t border-brand-blue/10 bg-[#F4F6FC]">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div>
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red block mb-2">Next Project</span>
-              <Link 
-                to={`/projects/${nextProject.id}`}
-                className="text-3xl md:text-5xl font-display font-semibold text-brand-blue hover:text-brand-red transition-colors inline-flex items-center gap-4 group"
-              >
-                <span>{nextProject.name}</span>
-                <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
-              </Link>
-            </div>
+        {/* Minimal Footer Navigation Bar */}
+        <section className="py-14 px-6 md:px-12 border-t border-brand-blue/10 bg-white">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <Link
+              to={`/projects/${prevProject.id}`}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-brand-blue/70 hover:text-brand-red uppercase tracking-wider transition-colors"
+            >
+              <ArrowLeft size={14} />
+              <span className="hidden sm:inline">Previous:</span> {prevProject.name}
+            </Link>
 
             <Link
-              to="/projects"
-              className="px-8 py-3.5 rounded-full border border-brand-blue/20 text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue hover:bg-brand-blue hover:text-white transition-all"
+              to={`/projects/${nextProject.id}`}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-brand-blue/70 hover:text-brand-red uppercase tracking-wider transition-colors"
             >
-              All Projects
+              <span className="hidden sm:inline">Next:</span> {nextProject.name}
+              <ArrowRight size={14} />
             </Link>
           </div>
         </section>

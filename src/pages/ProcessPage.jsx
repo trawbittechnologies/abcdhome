@@ -11,7 +11,7 @@ const processSteps = [
     phase: "Phase 1: Discovery & Site Diagnostics",
     title: "Understanding Context, Sunlight & Client Vision",
     icon: Search,
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/subhash1.png",
     description: "We initiate every project with rigorous site diagnostics — analyzing sun path diagrams, coastal wind dynamics, soil characteristics, and local zoning laws. We conduct in-depth interviews with the client to understand daily spatial rituals and lifestyle needs.",
     deliverables: ["Site Microclimate Report", "Spatial Brief Document", "Budget Range & Feasibility Assessment"]
   },
@@ -20,7 +20,7 @@ const processSteps = [
     phase: "Phase 2: Schematic Architecture & 3D Spatial Renders",
     title: "Translating Intent into Volume, Light & Flow",
     icon: PenTool,
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/kbr.png",
     description: "Our design team translates functional requirements into bold 3D forms. We explore multiple massing options, courtyard configurations, and natural ventilation channels. The client reviews photorealistic visualizations to experience every room before a single brick is laid.",
     deliverables: ["Conceptual Floor Plans & Massing", "Photorealistic 3D Visualizations", "Initial Material & Texture Board"]
   },
@@ -29,7 +29,7 @@ const processSteps = [
     phase: "Phase 3: Working Drawings & Structural Blueprinting",
     title: "Precision Engineering & Statutory Approvals",
     icon: FileText,
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/IMG_4031.JPG.jpeg",
     description: "Once the concept is frozen, our engineers draft millimeter-accurate architectural, structural, and MEP working blueprints. We handle all local municipal filings, structural safety certifications, and generate transparent itemized BOQs (Bill of Quantities).",
     deliverables: ["Structural & RCC Engineering Blueprints", "Complete MEP Layouts (Electrical & Plumbing)", "Municipal Sanctions & Transparent BOQ"]
   },
@@ -38,7 +38,7 @@ const processSteps = [
     phase: "Phase 4: Turnkey On-Site Execution & Craftsmanship",
     title: "Building What We Draw Under Strict Quality Control",
     icon: Hammer,
-    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80",
+    image: "/interior/living01.png",
     description: "Our dedicated site engineers take physical charge of the construction. From concrete cube testing to custom teak wood joinery in our Cherkala workshop, every component is rigorously tested against architectural tolerances.",
     deliverables: ["Dedicated Daily Site Engineering Supervision", "Bi-Weekly Progress Milestone Reports", "Bespoke In-House Woodwork & Joinery Fabrication"]
   },
@@ -47,7 +47,7 @@ const processSteps = [
     phase: "Phase 5: Quality Snagging & Turnkey Handover",
     title: "Flawless Delivery with Enduring Support",
     icon: Key,
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/PHOTO-2024-05-10-17-56-20%2016.jpg.jpeg",
     description: "Prior to client handover, our lead architects perform a multi-point quality snagging inspection across lighting, plumbing pressure, waterproofing, and surface finishes. We hand over the keys alongside comprehensive warranty documentation.",
     deliverables: ["Comprehensive As-Built Documentation", "Multi-Point Snagging Certification", "Turnkey Key Handover & Post-Occupancy Support"]
   }

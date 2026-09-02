@@ -96,7 +96,7 @@ const About = () => {
               {/* Primary Visual */}
               <div className="lg:col-span-8 rounded-3xl overflow-hidden border border-brand-blue/10 shadow-sm relative min-h-[420px] bg-brand-gray">
                 <img
-                  src="https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?auto=format&fit=crop&w=1600&q=80"
+                  src="/exterior/kbr.png"
                   alt="ABCD Construction Site & Craft"
                   className="w-full h-full object-cover"
                 />

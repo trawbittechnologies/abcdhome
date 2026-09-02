@@ -25,7 +25,7 @@ const StudioIntro = () => {
           >
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold text-brand-blue leading-[1.05] tracking-tight">
               We eliminate the gap between<br />
-              <span className="text-brand-red italic font-light">visionary design</span> and physical craft.
+              <span className="text-brand-red italic font-serif font-normal">visionary design</span> and physical craft.
             </h2>
           </motion.div>
 
@@ -61,7 +61,7 @@ const StudioIntro = () => {
           >
             <motion.div className="absolute inset-0" variants={imageReveal}>
               <img 
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&fm=webp&q=80" 
+                src="/exterior/mustafa.png" 
                 alt="ABCD Contemporary Architecture in Kerala"
                 loading="lazy"
                 decoding="async"
@@ -69,7 +69,7 @@ const StudioIntro = () => {
               />
             </motion.div>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/85 via-black/15 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 via-black/15 to-transparent"></div>
             
             {/* Studio Location Overlay Pill */}
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white z-10">
@@ -90,13 +90,13 @@ const StudioIntro = () => {
             {/* Secondary Teak Wood / Joinery Visual */}
             <div className="relative h-60 rounded-3xl overflow-hidden shadow-glass border border-brand-blue/10 bg-brand-gray group">
               <img 
-                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&fm=webp&q=80" 
+                src="/interior/bed02.png" 
                 alt="Bespoke Joinery & Interior Craft"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/70 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/80 to-transparent"></div>
               <div className="absolute bottom-4 left-6 right-6 text-white flex items-center justify-between">
                 <span className="text-xs font-semibold tracking-wider">In-House Teak Joinery Studio</span>
                 <Sparkles size={16} className="text-brand-red" />

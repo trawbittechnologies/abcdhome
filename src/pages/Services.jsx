@@ -12,7 +12,7 @@ const servicesList = [
     title: "Architectural Design",
     tagline: "Visionary spatial concepts grounded in contextual intelligence.",
     icon: Compass,
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/subhashlandscape.png",
     description: "From master planning and conceptual site layouts to complete structural drawings and local municipal approvals. We design structures that elevate the human condition, maximize natural light, and withstand coastal climate demands.",
     deliverables: [
       "Site Analysis & Solar Orientation",
@@ -28,7 +28,7 @@ const servicesList = [
     title: "Interior Architecture",
     tagline: "Immersive, tailored interiors with bespoke craftsmanship.",
     icon: HomeIcon,
-    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80",
+    image: "/interior/living01.png",
     description: "Every interior environment is conceived as a seamless continuation of the architecture. We custom-design bespoke joinery, source premium natural stones and hardwoods, and plan precision lighting to create spaces of enduring luxury.",
     deliverables: [
       "Custom Teak & Hardwood Joinery",
@@ -44,7 +44,7 @@ const servicesList = [
     title: "Turnkey Construction",
     tagline: "Precision execution with zero compromise on design intent.",
     icon: Hammer,
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?auto=format&fit=crop&w=1600&q=80",
+    image: "/exterior/IMG_4031.JPG.jpeg",
     description: "We eliminate the friction between architect and contractor by managing the entire build in-house. Our experienced site engineers and master craftsmen execute every foundation, slab, and finish to strict international tolerances.",
     deliverables: [
       "Dedicated On-Site Engineering Supervision",

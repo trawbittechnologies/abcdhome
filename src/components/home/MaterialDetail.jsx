@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { fadeUpVariant, imageReveal } from '../../utils/animations';
 
 const materials = [
-  { label: "STONE", no: "01", style: "col-span-12 md:col-span-7 aspect-[16/9] md:aspect-auto md:h-96" },
-  { label: "WOOD", no: "02", style: "col-span-12 md:col-span-5 aspect-[4/3] md:aspect-auto md:h-96" },
-  { label: "LIGHT", no: "03", style: "col-span-12 md:col-span-4 aspect-square md:aspect-auto md:h-[30rem]" },
-  { label: "DETAIL", no: "04", style: "col-span-12 md:col-span-8 aspect-[16/9] md:aspect-auto md:h-[30rem]" }
+  { label: "STONE & ELEVATION", no: "01", src: "/exterior/bachi.png", style: "col-span-12 md:col-span-7 aspect-[16/9] md:aspect-auto md:h-96" },
+  { label: "TEAK WOOD CRAFT", no: "02", src: "/interior/bed02.png", style: "col-span-12 md:col-span-5 aspect-[4/3] md:aspect-auto md:h-96" },
+  { label: "AMBIENT LIGHTING", no: "03", src: "/interior/living01.png", style: "col-span-12 md:col-span-4 aspect-square md:aspect-auto md:h-[30rem]" },
+  { label: "ARCHITECTURAL DETAIL", no: "04", src: "/interior/PRAYER%20.jpg%20(1).jpeg", style: "col-span-12 md:col-span-8 aspect-[16/9] md:aspect-auto md:h-[30rem]" }
 ];
 
 const MaterialDetail = () => {
@@ -34,16 +34,19 @@ const MaterialDetail = () => {
           {materials.map((item) => (
             <motion.div 
               key={item.no} 
-              className={`${item.style} relative group overflow-hidden bg-warm-stone/30`}
+              className={`${item.style} relative group overflow-hidden bg-warm-stone/30 rounded-2xl`}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={imageReveal}
             >
-              {/* Image Placeholder */}
-              <div className="absolute inset-0 bg-graphite/5 transition-transform duration-1000 group-hover:scale-105"></div>
+              <img 
+                src={item.src} 
+                alt={item.label}
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
               
-              <div className="absolute inset-0 p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/50 via-transparent to-transparent">
+              <div className="absolute inset-0 p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
                 <div className="self-end">
                   <span className="text-[10px] font-mono text-white/80 tracking-widest">/ {item.no}</span>
                 </div>

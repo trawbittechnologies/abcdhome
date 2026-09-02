@@ -22,14 +22,14 @@ const FeaturedProject = () => {
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">Spotlight Build</span>
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold text-brand-blue leading-[1.05] tracking-tight">
-              The Coastal Retreat.
+              KBR Contemporary Residence.
             </h2>
           </div>
 
           <div className="flex items-center gap-6 text-sm font-light text-brand-blue/60">
             <span className="flex items-center gap-1.5">
               <MapPin size={16} className="text-brand-red" />
-              Kanhangad, Kerala
+              Kasaragod, Kerala
             </span>
             <span>·</span>
             <span>4,800 sq.ft Turnkey Villa</span>
@@ -45,14 +45,14 @@ const FeaturedProject = () => {
         >
           <motion.div className="absolute inset-0" variants={imageReveal}>
             <img
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
-              alt="The Coastal Retreat by ABCD Studio"
+              src="/exterior/kbr.png"
+              alt="KBR Contemporary Residence by ABCD Home"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
             />
           </motion.div>
           
           {/* Subtle vignette gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 via-black/20 to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/95 via-brand-blue/30 to-transparent pointer-events-none"></div>
 
           {/* Floating Data & Specs Overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 text-white z-10">
@@ -63,7 +63,7 @@ const FeaturedProject = () => {
                   Architecture & Turnkey Build
                 </span>
                 <span className="text-[10px] font-semibold tracking-wider uppercase bg-white/20 backdrop-blur-md px-3.5 py-1 rounded-full text-white">
-                  Completed 2024
+                  Signature Residence
                 </span>
               </div>
               
@@ -72,7 +72,7 @@ const FeaturedProject = () => {
               </h3>
 
               <p className="text-xs md:text-sm font-light text-white/70 line-clamp-2 leading-relaxed">
-                Featuring floor-to-ceiling panoramic glass facing the sea, custom in-house teak woodwork, and a recessed courtyard for passive cooling.
+                Featuring dynamic geometric overhangs, warm wood soffits, custom in-house teak woodwork, and ambient facade illumination.
               </p>
             </div>
 
