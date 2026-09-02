@@ -1,55 +1,93 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Search, PenTool, FileText, Hammer, Key, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Compass, Layers, ShieldCheck, Hammer, KeyRound } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
-import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal } from '../utils/animations';
+import { textRevealContainer, textRevealChild } from '../utils/animations';
 
-const processSteps = [
+const constructionMilestones = [
   {
     step: "01",
-    phase: "Phase 1: Discovery & Site Diagnostics",
-    title: "Understanding Context, Sunlight & Client Vision",
-    icon: Search,
-    image: "/exterior/subhash1.png",
-    description: "We initiate every project with rigorous site diagnostics — analyzing sun path diagrams, coastal wind dynamics, soil characteristics, and local zoning laws. We conduct in-depth interviews with the client to understand daily spatial rituals and lifestyle needs.",
-    deliverables: ["Site Microclimate Report", "Spatial Brief Document", "Budget Range & Feasibility Assessment"]
+    phase: "Groundwork & Site Study",
+    stageName: "The Foundation",
+    title: "Understanding Your Land & Family Needs",
+    icon: Compass,
+    story: "Every building starts with the soil. We walk your plot together to inspect soil quality, natural water flow, wind direction, and solar angles while discussing your family's budget and daily routine.",
+    deliverables: [
+      "On-site soil & contour study",
+      "Sunlight and cross-ventilation analysis",
+      "Honest initial budget guidance"
+    ]
   },
   {
     step: "02",
-    phase: "Phase 2: Schematic Architecture & 3D Spatial Renders",
-    title: "Translating Intent into Volume, Light & Flow",
-    icon: PenTool,
-    image: "/exterior/kbr.png",
-    description: "Our design team translates functional requirements into bold 3D forms. We explore multiple massing options, courtyard configurations, and natural ventilation channels. The client reviews photorealistic visualizations to experience every room before a single brick is laid.",
-    deliverables: ["Conceptual Floor Plans & Massing", "Photorealistic 3D Visualizations", "Initial Material & Texture Board"]
+    phase: "Architectural Planning",
+    stageName: "The Blueprint",
+    title: "Crafting 3D Spaces Before We Break Ground",
+    icon: Layers,
+    story: "We design custom floor layouts and realistic 3D walkthroughs. You can see how rooms connect, adjust ceiling heights, and choose authentic materials so you feel completely confident before construction starts.",
+    deliverables: [
+      "Custom architectural floor plans",
+      "Photorealistic 3D exterior & room views",
+      "Material, texture, and stone selection"
+    ]
   },
   {
     step: "03",
-    phase: "Phase 3: Working Drawings & Structural Blueprinting",
-    title: "Precision Engineering & Statutory Approvals",
-    icon: FileText,
-    image: "/exterior/IMG_4031.JPG.jpeg",
-    description: "Once the concept is frozen, our engineers draft millimeter-accurate architectural, structural, and MEP working blueprints. We handle all local municipal filings, structural safety certifications, and generate transparent itemized BOQs (Bill of Quantities).",
-    deliverables: ["Structural & RCC Engineering Blueprints", "Complete MEP Layouts (Electrical & Plumbing)", "Municipal Sanctions & Transparent BOQ"]
+    phase: "Structural Engineering",
+    stageName: "The Structure",
+    title: "Engineered RCC Strength & Government Approvals",
+    icon: ShieldCheck,
+    story: "Our licensed structural engineers calculate beam loads, column placements, and electrical conduits to handle coastal Kerala weather. We handle all municipal paperwork and building permits directly.",
+    deliverables: [
+      "RCC structural engineering blueprints",
+      "Complete electrical and plumbing layouts",
+      "Local municipality permit clearances"
+    ]
   },
   {
     step: "04",
-    phase: "Phase 4: Turnkey On-Site Execution & Craftsmanship",
-    title: "Building What We Draw Under Strict Quality Control",
+    phase: "On-Site Civil Build",
+    stageName: "The Craftsmanship",
+    title: "Daily Engineering Supervision & Teak Joinery",
     icon: Hammer,
-    image: "/interior/living01.png",
-    description: "Our dedicated site engineers take physical charge of the construction. From concrete cube testing to custom teak wood joinery in our Cherkala workshop, every component is rigorously tested against architectural tolerances.",
-    deliverables: ["Dedicated Daily Site Engineering Supervision", "Bi-Weekly Progress Milestone Reports", "Bespoke In-House Woodwork & Joinery Fabrication"]
+    story: "Our site engineers are on your plot every day overseeing foundation pouring, brick masonry, and waterproofing. Custom teak doors, windows, and modular cabinetry are handcrafted in our in-house carpentry workshop.",
+    deliverables: [
+      "Daily on-site engineering supervision",
+      "Regular photo & progress milestone updates",
+      "Handcrafted teak wood joinery"
+    ]
   },
   {
     step: "05",
-    phase: "Phase 5: Quality Snagging & Turnkey Handover",
-    title: "Flawless Delivery with Enduring Support",
-    icon: Key,
-    image: "/exterior/PHOTO-2024-05-10-17-56-20%2016.jpg.jpeg",
-    description: "Prior to client handover, our lead architects perform a multi-point quality snagging inspection across lighting, plumbing pressure, waterproofing, and surface finishes. We hand over the keys alongside comprehensive warranty documentation.",
-    deliverables: ["Comprehensive As-Built Documentation", "Multi-Point Snagging Certification", "Turnkey Key Handover & Post-Occupancy Support"]
+    phase: "Final Snagging & Delivery",
+    stageName: "The Key Handover",
+    title: "Thorough Quality Check & Welcoming You Home",
+    icon: KeyRound,
+    story: "Before moving day, our team inspects every electrical switch, water pressure valve, tile alignment, and paint surface. We hand over the keys to your move-in ready home with full warranty documentation.",
+    deliverables: [
+      "Multi-point quality snagging inspection",
+      "Complete warranty dossier & as-built drawings",
+      "Official key handover ceremony"
+    ]
+  }
+];
+
+const constructionPillars = [
+  {
+    num: "01",
+    title: "Architect-Led Civil Build",
+    desc: "We don't hand off designs to external contractors. The same team that draws your blueprints builds your walls."
+  },
+  {
+    num: "02",
+    title: "Milestone-Linked Payments",
+    desc: "You pay stage-by-stage only after verified physical milestones (foundation, slab casting, masonry, finishing) are completed."
+  },
+  {
+    num: "03",
+    title: "Engineered for Kerala Rains",
+    desc: "Specialized multi-layer waterproofing, deep shading overhangs, and corrosion-resistant steel designed for coastal monsoons."
   }
 ];
 
@@ -60,150 +98,191 @@ const ProcessPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#FAFBFF] text-brand-blue">
+      <div className="min-h-screen bg-[#FAFBFF] text-brand-blue selection:bg-brand-red selection:text-white">
         
-        {/* Header */}
-        <section className="pt-40 md:pt-48 pb-16 px-6 md:px-12 border-b border-brand-blue/10">
+        {/* Editorial Minimal Header */}
+        <section className="pt-36 md:pt-44 pb-14 md:pb-18 px-6 md:px-12 border-b border-brand-blue/10 bg-gradient-to-b from-white via-white to-[#FAFBFF]">
           <div className="max-w-7xl mx-auto">
             
-            <motion.div
-              className="flex items-center space-x-3 mb-6"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="h-[1px] w-8 bg-brand-red"></div>
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">The ABCD Method</span>
-            </motion.div>
-
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
               <motion.div
-                className="overflow-hidden max-w-3xl"
+                className="lg:col-span-8"
                 variants={textRevealContainer}
                 initial="hidden"
                 animate="visible"
               >
                 <motion.h1 
-                  className="text-5xl md:text-7xl lg:text-8xl font-display font-semibold leading-[1.0] tracking-tight"
+                  className="text-4xl sm:text-6xl md:text-7xl font-display font-semibold tracking-tight text-brand-blue leading-[1.05]"
                   variants={textRevealChild}
                 >
-                  From concept sketch to<br />
-                  <span className="text-brand-red italic font-light">turnkey</span> reality.
+                  From Groundwork to <br />
+                  <span className="text-brand-red font-serif italic font-normal">Living Sanctuary.</span>
                 </motion.h1>
               </motion.div>
 
-              <motion.p
-                className="text-base md:text-lg font-light text-brand-blue/70 max-w-md leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+              <motion.div
+                className="lg:col-span-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
               >
-                Our 5-phase design-build methodology guarantees architectural integrity, strict budget adherence, and flawless execution.
-              </motion.p>
+                <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-4">
+                  How we construct your home step by step—combining structural engineering, daily supervision, and handcrafted teak woodwork under one accountable team.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-brand-red hover:underline"
+                >
+                  <span>Start with Step 01</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </motion.div>
             </div>
 
           </div>
         </section>
 
-        {/* Process Phases Roadmap */}
-        <section className="py-24 md:py-32 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto space-y-20">
+        {/* Clean, Humanized Construction Roadmap Flow */}
+        <section className="py-20 md:py-28 px-6 md:px-12 relative">
+          <div className="max-w-4xl mx-auto relative">
             
-            {processSteps.map((step, idx) => {
-              const Icon = step.icon;
-              const isEven = idx % 2 === 1;
+            {/* Structural Axis Line (Continuous vertical connecting line) */}
+            <div className="absolute left-6 md:left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-red via-brand-blue/25 to-brand-red" />
 
-              return (
-                <motion.div
-                  key={step.step}
-                  className="bg-white rounded-3xl border border-brand-blue/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={fadeUpVariant}
-                >
-                  <div className={`grid grid-cols-1 lg:grid-cols-12 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
-                    
-                    {/* Media */}
-                    <div className={`lg:col-span-5 relative min-h-[360px] lg:min-h-full overflow-hidden ${isEven ? 'lg:order-2' : ''}`}>
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/70 via-transparent to-transparent"></div>
+            <div className="space-y-12 md:space-y-16 relative z-10">
+              {constructionMilestones.map((milestone, idx) => {
+                const Icon = milestone.icon;
+
+                return (
+                  <motion.div
+                    key={milestone.step}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.45, delay: idx * 0.04 }}
+                    className="relative pl-16 md:pl-20"
+                  >
+                    {/* Structural Node Pin */}
+                    <div className="absolute left-0 top-1.5 w-12 md:w-16 flex items-center justify-center">
+                      <div className="w-10 h-10 md:w-11 md:h-11 rounded-2xl bg-white border-2 border-brand-red shadow-sm flex items-center justify-center text-brand-blue font-mono text-xs font-bold group-hover:bg-brand-red group-hover:text-white transition-colors">
+                        {milestone.step}
+                      </div>
+                    </div>
+
+                    {/* Milestone Card */}
+                    <div className="group bg-white rounded-3xl border border-brand-blue/10 hover:border-brand-blue/30 p-7 sm:p-9 md:p-10 shadow-[0_2px_12px_rgba(35,55,119,0.04)] hover:shadow-[0_10px_30px_rgba(35,55,119,0.08)] transition-all duration-300">
                       
-                      <div className="absolute top-6 left-6 w-12 h-12 rounded-2xl bg-brand-red text-white flex items-center justify-center font-display font-bold text-xl shadow-sm">
-                        {step.step}
-                      </div>
-
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue bg-white px-3.5 py-1.5 rounded-full shadow-sm">
-                          {step.phase}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className={`lg:col-span-7 p-8 md:p-14 flex flex-col justify-between ${isEven ? 'lg:order-1' : ''}`}>
-                      <div>
-                        <div className="flex items-center gap-3 mb-3">
-                          <Icon size={18} className="text-brand-red" />
-                          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-brand-blue/50">{step.phase}</span>
+                      {/* Top Phase Header */}
+                      <div className="flex items-center justify-between gap-4 mb-3">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-brand-red font-semibold">
+                            Phase {milestone.step} · {milestone.phase}
+                          </span>
+                          <span className="hidden sm:inline-block text-[10px] font-mono text-brand-blue/40 bg-brand-gray-light px-2.5 py-0.5 rounded-full">
+                            {milestone.stageName}
+                          </span>
                         </div>
-
-                        <h2 className="text-2xl md:text-4xl font-display font-semibold text-brand-blue mb-4 leading-tight">
-                          {step.title}
-                        </h2>
-
-                        <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-8">
-                          {step.description}
-                        </p>
-
-                        <div>
-                          <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/40 mb-3">Deliverables & Milestones</h3>
-                          <div className="space-y-2.5">
-                            {step.deliverables.map((item) => (
-                              <div key={item} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FAFBFF] border border-brand-blue/10">
-                                <CheckCircle2 size={16} className="text-brand-red flex-shrink-0" />
-                                <span className="text-xs font-medium text-brand-blue/80">{item}</span>
-                              </div>
-                            ))}
-                          </div>
+                        
+                        <div className="w-8 h-8 rounded-xl bg-[#FAFBFF] border border-brand-blue/10 flex items-center justify-center text-brand-red shrink-0">
+                          <Icon size={15} />
                         </div>
                       </div>
 
-                      <div className="pt-6 mt-8 border-t border-brand-blue/10 flex items-center justify-between text-xs text-brand-blue/40 font-semibold">
-                        <span>ABCD Method Quality Standard</span>
-                        <span className="text-brand-red font-bold">Step {step.step} of 05</span>
-                      </div>
-                    </div>
+                      {/* Main Title */}
+                      <h2 className="text-xl sm:text-2xl font-display font-semibold text-brand-blue mb-3 leading-snug">
+                        {milestone.title}
+                      </h2>
 
-                  </div>
-                </motion.div>
-              );
-            })}
+                      {/* Story Narrative */}
+                      <p className="text-sm font-light text-brand-blue/75 leading-relaxed mb-6">
+                        {milestone.story}
+                      </p>
+
+                      {/* Clear Milestone Deliverables */}
+                      <div className="pt-4 border-t border-brand-blue/10">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                          {milestone.deliverables.map((item) => (
+                            <div
+                              key={item}
+                              className="p-3 rounded-xl bg-[#FAFBFF] border border-brand-blue/5 text-xs font-light text-brand-blue/80 flex items-start gap-2"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 shrink-0" />
+                              <span className="leading-snug">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
 
           </div>
         </section>
 
-        {/* Action Banner */}
-        <section className="py-24 px-6 md:px-12 bg-brand-blue text-white">
-          <div className="max-w-7xl mx-auto text-center">
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red block mb-3">Ready to Begin?</span>
-            <h2 className="text-3xl md:text-5xl font-display font-semibold text-white mb-6">
-              Let's initiate Phase 1 for your property.
+        {/* 3 Core Guarantees */}
+        <section className="py-20 md:py-28 px-6 md:px-12 bg-white border-y border-brand-blue/10">
+          <div className="max-w-7xl mx-auto">
+            
+            <div className="max-w-3xl mb-14">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-brand-blue tracking-tight mb-3">
+                Built on Honest Accountability.
+              </h2>
+              <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed">
+                Clear milestones, daily engineering supervision, and spaces crafted to last.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+              {constructionPillars.map((item) => (
+                <div 
+                  key={item.num}
+                  className="p-8 rounded-3xl bg-[#FAFBFF] border border-brand-blue/10 flex flex-col justify-between shadow-sm"
+                >
+                  <div>
+                    <span className="text-xs font-mono font-semibold text-brand-red block mb-3">
+                      {item.num}
+                    </span>
+                    <h3 className="text-xl font-display font-semibold text-brand-blue mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm font-light text-brand-blue/70 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* Bottom Friendly Consultation CTA */}
+        <section className="py-20 px-6 md:px-12 bg-[#FAFBFF]">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-brand-blue tracking-tight">
+              Ready to break ground on your property?
             </h2>
-            <p className="text-base font-light text-white/70 max-w-lg mx-auto mb-10 leading-relaxed">
-              Book an on-site feasibility evaluation and spatial consultation with our senior architectural team.
+            <p className="text-sm md:text-base font-light text-brand-blue/70 max-w-xl mx-auto leading-relaxed">
+              Let's discuss your land and floor plan ideas over a friendly consultation in Cherkala – Kanhangad.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red-dark text-white text-xs font-semibold tracking-[0.2em] uppercase px-9 py-4 rounded-full transition-all duration-300 shadow-sm"
-            >
-              <span>Initiate Project Consultation</span>
-              <ArrowUpRight size={16} />
-            </Link>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/contact"
+                className="px-8 py-3.5 bg-brand-blue hover:bg-brand-red text-white text-xs font-semibold tracking-[0.15em] uppercase rounded-full transition-all duration-300 shadow-sm flex items-center gap-2"
+              >
+                <span>Talk With Our Architects</span>
+                <ArrowRight size={14} />
+              </Link>
+              <Link
+                to="/projects"
+                className="px-8 py-3.5 bg-white border border-brand-blue/20 hover:border-brand-blue text-brand-blue text-xs font-semibold tracking-[0.15em] uppercase rounded-full transition-all duration-300"
+              >
+                <span>View Completed Homes</span>
+              </Link>
+            </div>
           </div>
         </section>
 

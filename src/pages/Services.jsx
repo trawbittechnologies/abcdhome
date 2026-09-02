@@ -1,77 +1,57 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Compass, Home as HomeIcon, Hammer, CheckCircle2, ShieldCheck, Clock, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Compass, Home as HomeIcon, Hammer, ShieldCheck, Clock, Sparkles } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
-import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal, staggerContainer, fadeUpStaggerVariant } from '../utils/animations';
+import { fadeUpVariant, textRevealContainer, textRevealChild, staggerContainer, fadeUpStaggerVariant } from '../utils/animations';
 
-const servicesList = [
+const services = [
   {
-    id: "architecture",
     number: "01",
     title: "Architectural Design",
-    tagline: "Visionary spatial concepts grounded in contextual intelligence.",
-    icon: Compass,
+    tagline: "Visionary spatial design tailored for climate and contemporary living.",
     image: "/exterior/subhashlandscape.png",
-    description: "From master planning and conceptual site layouts to complete structural drawings and local municipal approvals. We design structures that elevate the human condition, maximize natural light, and withstand coastal climate demands.",
-    deliverables: [
-      "Site Analysis & Solar Orientation",
-      "Conceptual Massing & 3D Spatial Visualization",
-      "Comprehensive Architectural Working Drawings",
-      "Structural Engineering & Municipality Approvals",
-      "Landscape & Courtyard Integration"
+    link: "/projects",
+    scope: [
+      "Solar & Climatic Site Analysis",
+      "Conceptual Massing & 3D Spatial Plans",
+      "Structural Engineering & Approvals",
+      "Monsoon-Resilient Facades"
     ]
   },
   {
-    id: "interior",
     number: "02",
-    title: "Interior Architecture",
-    tagline: "Immersive, tailored interiors with bespoke craftsmanship.",
-    icon: HomeIcon,
+    title: "Bespoke Interior Architecture",
+    tagline: "Tailored interior environments with handcrafted teak joinery.",
     image: "/interior/living01.png",
-    description: "Every interior environment is conceived as a seamless continuation of the architecture. We custom-design bespoke joinery, source premium natural stones and hardwoods, and plan precision lighting to create spaces of enduring luxury.",
-    deliverables: [
-      "Custom Teak & Hardwood Joinery",
-      "Material, Stone & Finish Palette Curation",
-      "Architectural Lighting & Ceiling Design",
-      "Modular Kitchens & Luxury Bath Environments",
-      "Acoustic Planning & Custom Furniture"
+    link: "/projects",
+    scope: [
+      "Handcrafted Teak & Hardwood Joinery",
+      "Material & Natural Stone Curation",
+      "Architectural Lighting & Ceiling Plans",
+      "Turnkey Modular Kitchens"
     ]
   },
   {
-    id: "construction",
     number: "03",
-    title: "Turnkey Construction",
-    tagline: "Precision execution with zero compromise on design intent.",
-    icon: Hammer,
+    title: "Turnkey Civil Construction",
+    tagline: "End-to-end structural engineering with zero design compromises.",
     image: "/exterior/IMG_4031.JPG.jpeg",
-    description: "We eliminate the friction between architect and contractor by managing the entire build in-house. Our experienced site engineers and master craftsmen execute every foundation, slab, and finish to strict international tolerances.",
-    deliverables: [
-      "Dedicated On-Site Engineering Supervision",
-      "Rigorous Material Testing & Quality Snagging",
-      "Transparent Milestone-Based Billing & Timeline",
-      "Complete MEP (Mechanical, Electrical, Plumbing)",
-      "Turnkey Key-Handover & Post-Completion Support"
+    link: "/projects",
+    scope: [
+      "On-Site Engineering Supervision",
+      "High-Precision RCC Structural Build",
+      "Multi-Layer Waterproofing Systems",
+      "Zero-Snag Key Handover"
     ]
   }
 ];
 
-const pillars = [
-  {
-    icon: ShieldCheck,
-    title: "Single-Point Accountability",
-    desc: "No finger-pointing between architects and contractors. We own the entire lifecycle from blueprint to key handover."
-  },
-  {
-    icon: Clock,
-    title: "On-Time Milestones",
-    desc: "Structured project planning ensures strict adherence to schedules with zero unmonitored delays."
-  },
-  {
-    icon: Sparkles,
-    title: "Bespoke Materiality",
-    desc: "Direct sourcing of high-grade teak, structural steel, and curated tiles for unmatched longevity."
-  },
+const simpleWorkflow = [
+  { step: "01", name: "Site Consultation", desc: "Understanding your vision, topography, and budget parameters." },
+  { step: "02", name: "3D Design & Planning", desc: "Architectural blueprints, realistic 3D models, and municipality clearance." },
+  { step: "03", name: "Civil & Interior Build", desc: "Precision structural casting and in-house factory joinery execution." },
+  { step: "04", name: "Turnkey Handover", desc: "Comprehensive quality audit and ceremonial key delivery." }
 ];
 
 const Services = () => {
@@ -81,195 +61,183 @@ const Services = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#FAFBFF] text-brand-blue">
+      <div className="min-h-screen bg-[#FAFBFF] text-brand-blue selection:bg-brand-red selection:text-white">
         
-        {/* Hero Section */}
-        <section className="pt-40 md:pt-48 pb-16 px-6 md:px-12 border-b border-brand-blue/10">
+        {/* Simple & Elegant Editorial Header */}
+        <section className="pt-36 md:pt-44 pb-12 md:pb-16 px-6 md:px-12 border-b border-brand-blue/10 bg-gradient-to-b from-white via-white to-[#FAFBFF]">
           <div className="max-w-7xl mx-auto">
             
-            <motion.div
-              className="flex items-center space-x-3 mb-6"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="h-[1px] w-8 bg-brand-red"></div>
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">Our Capabilities</span>
-            </motion.div>
-
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
               <motion.div
-                className="overflow-hidden max-w-3xl"
+                className="lg:col-span-8"
                 variants={textRevealContainer}
                 initial="hidden"
                 animate="visible"
               >
                 <motion.h1 
-                  className="text-5xl md:text-7xl lg:text-8xl font-display font-semibold leading-[1.0] tracking-tight"
+                  className="text-4xl sm:text-6xl md:text-7xl font-display font-semibold tracking-tight text-brand-blue leading-[1.05]"
                   variants={textRevealChild}
                 >
-                  Unified design &<br />
-                  <span className="text-brand-red italic font-light">flawless</span> execution.
+                  Architecture, Interiors & <br />
+                  <span className="text-brand-red font-serif italic font-normal">Turnkey Engineering.</span>
                 </motion.h1>
               </motion.div>
 
-              <motion.p
-                className="text-base md:text-lg font-light text-brand-blue/70 max-w-md leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+              <motion.div
+                className="lg:col-span-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
               >
-                We offer a complete multidisciplinary ecosystem — bringing architecture, interior design, and turnkey engineering under one unified roof.
-              </motion.p>
+                <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-4">
+                  A seamless design-build practice uniting architectural innovation, structural civil engineering, and bespoke interior millwork under one unified standard.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-brand-red hover:underline"
+                >
+                  <span>Book a Consultation</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </motion.div>
             </div>
 
           </div>
         </section>
 
-        {/* Core Services Breakdown */}
-        <section className="py-24 md:py-32 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto space-y-24">
+        {/* 3 Core Services: Creative Minimal Grid */}
+        <section className="py-20 md:py-28 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto">
             
-            {servicesList.map((service, index) => {
-              const Icon = service.icon;
-              const isEven = index % 2 === 1;
-
-              return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+              {services.map((item, idx) => (
                 <motion.div
-                  key={service.id}
-                  className="bg-white rounded-3xl border border-brand-blue/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  key={item.number}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: true, margin: "-60px" }}
                   variants={fadeUpVariant}
+                  className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-brand-blue/10 hover:border-brand-blue/30 shadow-[0_2px_12px_rgba(35,55,119,0.04)] hover:shadow-[0_12px_32px_rgba(35,55,119,0.08)] transition-all duration-500"
                 >
-                  <div className={`grid grid-cols-1 lg:grid-cols-12 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
-                    
-                    {/* Media Column */}
-                    <div className={`lg:col-span-5 relative min-h-[380px] lg:min-h-full overflow-hidden ${isEven ? 'lg:order-2' : ''}`}>
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/60 via-transparent to-transparent"></div>
-                      
-                      {/* Badge in image */}
-                      <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-brand-red flex items-center justify-center text-white shadow-sm">
-                            <Icon size={20} />
+                  {/* Service Image Canvas */}
+                  <div className="relative aspect-[16/11] overflow-hidden bg-brand-gray">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+
+                    {/* Monospace Step Badge */}
+                    <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-brand-blue/10 text-[10px] font-mono font-semibold text-brand-blue shadow-sm">
+                      {item.number}
+                    </div>
+
+                    {/* Floating Action Arrow */}
+                    <div className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-md">
+                      <ArrowUpRight size={18} />
+                    </div>
+                  </div>
+
+                  {/* Content Details */}
+                  <div className="p-7 md:p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h2 className="text-2xl font-display font-semibold text-brand-blue group-hover:text-brand-red transition-colors mb-2">
+                        {item.title}
+                      </h2>
+                      <p className="text-xs md:text-sm font-light text-brand-blue/70 leading-relaxed mb-6">
+                        {item.tagline}
+                      </p>
+
+                      {/* Scope Tags */}
+                      <div className="space-y-2 pt-4 border-t border-brand-blue/10">
+                        {item.scope.map((tag) => (
+                          <div key={tag} className="flex items-center gap-2 text-xs font-light text-brand-blue/80">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-red/60" />
+                            <span>{tag}</span>
                           </div>
-                          <div>
-                            <p className="text-xs font-bold tracking-widest uppercase">{service.title}</p>
-                            <p className="text-[10px] text-white/70">ABCD Discipline {service.number}</p>
-                          </div>
-                        </div>
-                        <span className="text-2xl font-display font-bold text-white/40">{service.number}</span>
+                        ))}
                       </div>
                     </div>
 
-                    {/* Content Column */}
-                    <div className={`lg:col-span-7 p-8 md:p-14 flex flex-col justify-between ${isEven ? 'lg:order-1' : ''}`}>
-                      <div>
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="text-[10px] font-bold tracking-[0.25em] text-brand-red uppercase">DISCIPLINE {service.number}</span>
-                        </div>
-
-                        <h2 className="text-3xl md:text-5xl font-display font-semibold text-brand-blue mb-4">
-                          {service.title}
-                        </h2>
-
-                        <p className="text-base md:text-lg font-light text-brand-blue/80 italic mb-6">
-                          "{service.tagline}"
-                        </p>
-
-                        <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-8">
-                          {service.description}
-                        </p>
-
-                        {/* Deliverables Checklist */}
-                        <div>
-                          <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue/50 mb-4">Key Deliverables</h3>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {service.deliverables.map((item) => (
-                              <div key={item} className="flex items-start gap-2.5 p-3 rounded-xl bg-brand-gray-light/80 border border-brand-blue/5">
-                                <CheckCircle2 size={16} className="text-brand-red flex-shrink-0 mt-0.5" />
-                                <span className="text-xs font-medium text-brand-blue/80 leading-snug">{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="pt-8 mt-8 border-t border-brand-blue/10 flex items-center justify-between">
-                        <Link
-                          to="/contact"
-                          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue hover:text-brand-red transition-colors group"
-                        >
-                          <span>Commission {service.title}</span>
-                          <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                      </div>
-
+                    <div className="pt-6 mt-6 border-t border-brand-blue/10 flex items-center justify-between">
+                      <Link
+                        to="/contact"
+                        className="text-xs font-semibold tracking-wider uppercase text-brand-blue group-hover:text-brand-red transition-colors inline-flex items-center gap-1.5"
+                      >
+                        <span>Commission Service</span>
+                        <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
-
                   </div>
                 </motion.div>
-              );
-            })}
+              ))}
+            </div>
 
           </div>
         </section>
 
-        {/* Why Design-Build Architecture */}
-        <section className="py-24 px-6 md:px-12 bg-white border-y border-brand-blue/10">
+        {/* Simplified 4-Step Process Section */}
+        <section className="py-20 md:py-28 px-6 md:px-12 bg-white border-y border-brand-blue/10">
           <div className="max-w-7xl mx-auto">
             
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red block mb-3">The ABCD Advantage</span>
-              <h2 className="text-4xl md:text-5xl font-display font-semibold text-brand-blue mb-4">
-                Why our integrated method works.
+            <div className="max-w-3xl mb-14">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-brand-blue tracking-tight mb-3">
+                How We Deliver Your Sanctuary.
               </h2>
-              <p className="text-base font-light text-brand-blue/70 leading-relaxed">
-                By taking responsibility for both design creation and physical construction, we eliminate budget surprises, miscommunication, and design compromises.
+              <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed">
+                A structured, transparent pathway from preliminary sketch to key handover.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {pillars.map((pillar) => {
-                const Icon = pillar.icon;
-                return (
-                  <div key={pillar.title} className="p-8 md:p-10 rounded-3xl bg-[#FAFBFF] border border-brand-blue/10 shadow-sm">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-blue text-white flex items-center justify-center mb-6 shadow-sm">
-                      <Icon size={22} />
-                    </div>
-                    <h3 className="text-xl font-display font-semibold text-brand-blue mb-3">{pillar.title}</h3>
-                    <p className="text-sm font-light text-brand-blue/70 leading-relaxed">{pillar.desc}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {simpleWorkflow.map((item, idx) => (
+                <div 
+                  key={item.step}
+                  className="p-6 sm:p-7 rounded-2xl bg-[#FAFBFF] border border-brand-blue/10 flex flex-col justify-between space-y-4 shadow-sm"
+                >
+                  <div>
+                    <span className="text-xs font-mono font-semibold text-brand-red block mb-3">
+                      {item.step}
+                    </span>
+                    <h3 className="text-lg font-display font-semibold text-brand-blue mb-2">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs font-light text-brand-blue/70 leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
           </div>
         </section>
 
-        {/* Bottom Action CTA Strip */}
-        <section className="py-24 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-display font-semibold text-brand-blue mb-6">
-              Have a site in mind? Let’s evaluate its potential.
+        {/* Minimal Bottom Invitation */}
+        <section className="py-20 px-6 md:px-12 bg-[#FAFBFF]">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-brand-blue tracking-tight">
+              Have a plot or renovation in mind?
             </h2>
-            <p className="text-base font-light text-brand-blue/70 max-w-lg mx-auto mb-10 leading-relaxed">
-              Schedule an introductory design consultation with our lead architects in Cherkala – Kanhangad.
+            <p className="text-sm md:text-base font-light text-brand-blue/70 max-w-xl mx-auto leading-relaxed">
+              Consult directly with our lead architects and engineers in Kasaragod and Kanhangad to evaluate your site potential.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red-dark text-white text-xs font-semibold tracking-[0.2em] uppercase px-9 py-4 rounded-full transition-all duration-300 shadow-sm"
-            >
-              <span>Schedule Consultation</span>
-              <ArrowUpRight size={16} />
-            </Link>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/contact"
+                className="px-8 py-3.5 bg-brand-blue hover:bg-brand-red text-white text-xs font-semibold tracking-[0.15em] uppercase rounded-full transition-all duration-300 shadow-sm flex items-center gap-2"
+              >
+                <span>Schedule Consultation</span>
+                <ArrowRight size={14} />
+              </Link>
+              <Link
+                to="/projects"
+                className="px-8 py-3.5 bg-white border border-brand-blue/20 hover:border-brand-blue text-brand-blue text-xs font-semibold tracking-[0.15em] uppercase rounded-full transition-all duration-300"
+              >
+                <span>Browse Completed Works</span>
+              </Link>
+            </div>
           </div>
         </section>
 
