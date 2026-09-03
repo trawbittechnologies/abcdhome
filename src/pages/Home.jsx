@@ -124,7 +124,7 @@ const Home = () => {
                     <div className="flex items-baseline gap-2.5">
                       <span className="font-serif italic text-white/40 text-xs sm:text-sm select-none">01</span>
                       <p className="text-4xl sm:text-5xl font-display font-light text-white tracking-tight">
-                        120<span className="font-serif italic font-normal text-brand-red ml-0.5">+</span>
+                        300<span className="font-serif italic font-normal text-brand-red ml-0.5">+</span>
                       </p>
                     </div>
                     <p className="text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-white/75 mt-1">
@@ -137,7 +137,7 @@ const Home = () => {
                     <div className="flex items-baseline gap-2.5">
                       <span className="font-serif italic text-white/40 text-xs sm:text-sm select-none">02</span>
                       <p className="text-4xl sm:text-5xl font-display font-light text-white tracking-tight">
-                        08<span className="font-serif italic font-normal text-brand-red ml-0.5">+</span> <span className="text-xl sm:text-2xl font-light text-white/60">Years</span>
+                        15<span className="font-serif italic font-normal text-brand-red ml-0.5">+</span> <span className="text-xl sm:text-2xl font-light text-white/60">Years</span>
                       </p>
                     </div>
                     <p className="text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-white/75 mt-1">

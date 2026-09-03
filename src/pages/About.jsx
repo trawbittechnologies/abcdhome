@@ -104,7 +104,7 @@ const About = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-brand-blue/10">
               <div className="p-6 rounded-2xl bg-white border border-brand-blue/10">
                 <span className="text-3xl sm:text-4xl font-display font-semibold text-brand-blue block mb-1">
-                  120+
+                  300+
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-wider text-brand-red block mb-1">
                   Completed Projects
@@ -116,7 +116,7 @@ const About = () => {
 
               <div className="p-6 rounded-2xl bg-white border border-brand-blue/10">
                 <span className="text-3xl sm:text-4xl font-display font-semibold text-brand-blue block mb-1">
-                  8+ Years
+                  15+ Years
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-wider text-brand-red block mb-1">
                   Design-Build Practice

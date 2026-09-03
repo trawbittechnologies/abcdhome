@@ -99,11 +99,11 @@ const ProcessPage = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#FAFBFF] text-brand-blue selection:bg-brand-red selection:text-white">
-        
+
         {/* Editorial Minimal Header */}
         <section className="pt-36 md:pt-44 pb-14 md:pb-18 px-6 md:px-12 border-b border-brand-blue/10 bg-gradient-to-b from-white via-white to-[#FAFBFF]">
           <div className="max-w-7xl mx-auto">
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
               <motion.div
                 className="lg:col-span-8"
@@ -111,7 +111,7 @@ const ProcessPage = () => {
                 initial="hidden"
                 animate="visible"
               >
-                <motion.h1 
+                <motion.h1
                   className="text-4xl sm:text-6xl md:text-7xl font-display font-semibold tracking-tight text-brand-blue leading-[1.05]"
                   variants={textRevealChild}
                 >
@@ -145,7 +145,7 @@ const ProcessPage = () => {
         {/* Clean, Humanized Construction Roadmap Flow */}
         <section className="py-20 md:py-28 px-6 md:px-12 relative">
           <div className="max-w-4xl mx-auto relative">
-            
+
             {/* Structural Axis Line (Continuous vertical connecting line) */}
             <div className="absolute left-6 md:left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-red via-brand-blue/25 to-brand-red" />
 
@@ -171,7 +171,7 @@ const ProcessPage = () => {
 
                     {/* Milestone Card */}
                     <div className="group bg-white rounded-3xl border border-brand-blue/10 hover:border-brand-blue/30 p-7 sm:p-9 md:p-10 shadow-[0_2px_12px_rgba(35,55,119,0.04)] hover:shadow-[0_10px_30px_rgba(35,55,119,0.08)] transition-all duration-300">
-                      
+
                       {/* Top Phase Header */}
                       <div className="flex items-center justify-between gap-4 mb-3">
                         <div className="flex items-center gap-3">
@@ -182,7 +182,7 @@ const ProcessPage = () => {
                             {milestone.stageName}
                           </span>
                         </div>
-                        
+
                         <div className="w-8 h-8 rounded-xl bg-[#FAFBFF] border border-brand-blue/10 flex items-center justify-center text-brand-red shrink-0">
                           <Icon size={15} />
                         </div>
@@ -225,7 +225,7 @@ const ProcessPage = () => {
         {/* 3 Core Guarantees */}
         <section className="py-20 md:py-28 px-6 md:px-12 bg-white border-y border-brand-blue/10">
           <div className="max-w-7xl mx-auto">
-            
+
             <div className="max-w-3xl mb-14">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold text-brand-blue tracking-tight mb-3">
                 Built on Honest Accountability.
@@ -237,7 +237,7 @@ const ProcessPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
               {constructionPillars.map((item) => (
-                <div 
+                <div
                   key={item.num}
                   className="p-8 rounded-3xl bg-[#FAFBFF] border border-brand-blue/10 flex flex-col justify-between shadow-sm"
                 >
