@@ -106,13 +106,13 @@ const StudioIntro = () => {
             {/* Metric Tiles 2-Col */}
             <div className="grid grid-cols-2 gap-4 flex-1">
               <div className="p-6 md:p-8 rounded-3xl bg-white border border-brand-blue/10 shadow-glass flex flex-col justify-center transition-all hover:border-brand-blue/30">
-                <p className="text-4xl md:text-5xl font-display font-bold text-brand-blue">120+</p>
+                <p className="text-4xl md:text-5xl font-display font-bold text-brand-blue">300+</p>
                 <p className="text-xs font-bold tracking-widest uppercase text-brand-red mt-2">Projects Built</p>
                 <p className="text-[11px] font-light text-brand-blue/60 mt-1">Across North Kerala.</p>
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl bg-brand-blue text-white shadow-glass flex flex-col justify-center transition-all hover:bg-brand-blue-dark">
-                <p className="text-4xl md:text-5xl font-display font-bold text-white">8+ Yrs</p>
+                <p className="text-4xl md:text-5xl font-display font-bold text-white">15+ Yrs</p>
                 <p className="text-xs font-bold tracking-widest uppercase text-brand-red mt-2">Design-Build</p>
                 <p className="text-[11px] font-light text-white/70 mt-1">Single accountability.</p>
               </div>
