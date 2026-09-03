@@ -1762,59 +1762,5 @@ export const allProjectsData = [
       "Client Milestone",
       "Completed Residence"
     ]
-  },
-  {
-    "id": "proj-99",
-    "number": "99",
-    "name": "ABCD Studio Signature Brand Identity & Emblem",
-    "category": "STUDIO IDENTITY",
-    "pillar": "brand",
-    "year": "2024",
-    "location": "Cherkala – Kanhangad, Kerala",
-    "area": "Studio Headquarters",
-    "scope": "Design & Build Practice",
-    "image": "/abcd(logo)final%20(1).png",
-    "description": "The official architectural emblem of ABCD Studio, symbolizing precision, monolithic balance, and single-source design-build accountability.",
-    "tags": [
-      "Studio Emblem",
-      "Brand Identity",
-      "ABCD Studio"
-    ]
-  },
-  {
-    "id": "proj-100",
-    "number": "100",
-    "name": "ABCD Architectural Geometric Crest & Monogram",
-    "category": "STUDIO IDENTITY",
-    "pillar": "brand",
-    "year": "2024",
-    "location": "Cherkala – Kanhangad",
-    "area": "Design System",
-    "scope": "Brand Monogram",
-    "image": "/favicon.svg",
-    "description": "Bespoke geometric crest crafted with architectural drafting lines and golden-ratio proportions representing our structural design ethos.",
-    "tags": [
-      "Brand Crest",
-      "Drafting Monogram",
-      "Identity"
-    ]
-  },
-  {
-    "id": "proj-101",
-    "number": "101",
-    "name": "ABCD Vector Iconography & Master Visual System",
-    "category": "STUDIO IDENTITY",
-    "pillar": "brand",
-    "year": "2024",
-    "location": "Cherkala – Kanhangad",
-    "area": "Design System",
-    "scope": "Vector System",
-    "image": "/icons.svg",
-    "description": "Precision drafting symbols, blueprint orientation markers, and material detailing iconography used across ABCD documentation.",
-    "tags": [
-      "Iconography",
-      "Blueprint Symbols",
-      "Design System"
-    ]
   }
 ];
