@@ -264,7 +264,7 @@ const SelectedWork = () => {
                   className="flex-shrink-0 w-[310px] sm:w-[400px] md:w-[440px] snap-start"
                 >
                   <Link
-                    to={`/projects/${project.id}`}
+                    to="/projects"
                     className={`group flex flex-col h-full bg-white rounded-3xl overflow-hidden border transition-all duration-500 ${isActive
                         ? 'border-brand-blue/30 shadow-glass-lg ring-1 ring-brand-blue/20 -translate-y-1.5'
                         : 'border-brand-blue/10 hover:border-brand-blue/30 shadow-glass hover:shadow-glass-lg'

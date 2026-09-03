@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -12,174 +13,25 @@ import {
   List, 
   Calendar,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  X,
+  Maximize2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
 import { fadeUpVariant, textRevealContainer, textRevealChild, imageReveal, staggerContainer, fadeUpStaggerVariant } from '../utils/animations';
 
-export const allProjectsData = [
-  {
-    id: "kbr-residence",
-    number: "01",
-    name: "KBR Contemporary Residence",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2024",
-    location: "Kasaragod, Kerala",
-    area: "4,800 sq.ft",
-    scope: "Turnkey Architecture & Civil Build",
-    image: "/exterior/kbr.png",
-    description: "Multi-level contemporary villa featuring bold cantilevered balconies, natural teak wood soffits, and integrated facade illumination.",
-    tags: ["Residential Villa", "Cantilever", "Turnkey Build"]
-  },
-  {
-    id: "subhash-residence",
-    number: "02",
-    name: "Subhash Tropical Modern Villa",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2024",
-    location: "Kanhangad, Kerala",
-    area: "5,200 sq.ft",
-    scope: "Architecture & Landscape Design",
-    image: "/exterior/subhashlandscape.png",
-    description: "Monsoon-resilient tropical estate with double-height glass entryway, open courtyard ventilation, and tiered garden terraces.",
-    tags: ["Tropical Modern", "Landscape", "Double Height"]
-  },
-  {
-    id: "mustafa-villa",
-    number: "03",
-    name: "Mustafa Minimalist Residence",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2023",
-    location: "Cherkala, Kasaragod",
-    area: "4,200 sq.ft",
-    scope: "Turnkey Architecture & Interior",
-    image: "/exterior/mustafa.png",
-    description: "Monolithic cuboid massing accented with vertical architectural louvers and expansive glazing for optimal natural cross-ventilation.",
-    tags: ["Monolithic Facade", "Monsoon Architecture", "Turnkey"]
-  },
-  {
-    id: "farook-residence",
-    number: "04",
-    name: "Farook Waterfront Residence",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2024",
-    location: "Kasaragod, Kerala",
-    area: "3,900 sq.ft",
-    scope: "Architectural Planning & Execution",
-    image: "/exterior/farook.png",
-    description: "Sculptural residential elevation with deep recessed verandas, tempered glass balustrades, and natural stone veneer accents.",
-    tags: ["Waterfront Residence", "Terraces", "Modernist"]
-  },
-  {
-    id: "ashith-berka",
-    number: "05",
-    name: "Ashith Berka Signature Villa",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2023",
-    location: "Berka, Kasaragod",
-    area: "3,600 sq.ft",
-    scope: "Turnkey Architectural Design",
-    image: "/exterior/ashithberka.png",
-    description: "Harmoniously proportioned modern villa with a double-height entrance porch, textured stone cladding, and warm ambient uplighting.",
-    tags: ["Dual Carport", "Stone Cladding", "Residential"]
-  },
-  {
-    id: "bachi-residence",
-    number: "06",
-    name: "Bachi Residence & Upper Terrace",
-    category: "ARCHITECTURE",
-    pillar: "exterior",
-    year: "2023",
-    location: "Cherkala, Kasaragod",
-    area: "3,800 sq.ft",
-    scope: "Architectural Design & Build",
-    image: "/exterior/bachi.png",
-    description: "Street-facing contemporary facade with textured grey stone finishes, cantilevered master balconies, and perimeter landscaping.",
-    tags: ["Stone Masonry", "Cantilever Balcony", "Villa"]
-  },
-  {
-    id: "commercial-studio",
-    number: "07",
-    name: "ABCD Commercial Studio Complex",
-    category: "CONSTRUCTION",
-    pillar: "exterior",
-    year: "2024",
-    location: "Kanhangad, Kerala",
-    area: "8,500 sq.ft",
-    scope: "Commercial Architecture & Civil Execution",
-    image: "/exterior/commercial.png",
-    description: "High-performance commercial facility engineered with structural glass curtain walls, geometric metal fins, and energy-efficient shading.",
-    tags: ["Commercial Landmark", "Curtain Glazing", "RCC Frame"]
-  },
-  {
-    id: "living-sanctuary",
-    number: "08",
-    name: "Grand Living & Reception Hall",
-    category: "INTERIOR",
-    pillar: "interior",
-    year: "2024",
-    location: "Kanhangad, Kerala",
-    area: "1,100 sq.ft",
-    scope: "Bespoke Interior & Lighting Design",
-    image: "/interior/living01.png",
-    description: "Luxury double-height living hall featuring imported Italian marble flooring, bespoke fluted wall paneling, and curated ambient chandelier lighting.",
-    tags: ["Italian Marble", "Fluted Paneling", "Luxury Living"]
-  },
-  {
-    id: "master-suites",
-    number: "09",
-    name: "Bespoke Teak Master Bedroom Suite",
-    category: "INTERIOR",
-    pillar: "interior",
-    year: "2024",
-    location: "Cherkala, Kasaragod",
-    area: "650 sq.ft",
-    scope: "Custom Joinery & Lighting Fitout",
-    image: "/interior/bed02.png",
-    description: "Custom acoustically treated master bedroom sanctuary detailed with vertical teak woodwork, floating nightstands, and concealed cove backlighting.",
-    tags: ["Master Suite", "Teak Joinery", "Cove Lighting"]
-  },
-  {
-    id: "modular-kitchen",
-    number: "10",
-    name: "Executive Kitchen & Dining Pavilion",
-    category: "INTERIOR",
-    pillar: "interior",
-    year: "2024",
-    location: "Kasaragod, Kerala",
-    area: "850 sq.ft",
-    scope: "Modular Interior & Joinery",
-    image: "/interior/kitchen03.png",
-    description: "Precision modular kitchen and family dining space fitted with engineered quartz countertops, soft-close hardware, and ambient accent illumination.",
-    tags: ["Modular Kitchen", "Quartz Island", "Dining Joinery"]
-  },
-  {
-    id: "rcc-civil-execution",
-    number: "11",
-    name: "Turnkey Structural RCC & Civil Execution",
-    category: "CONSTRUCTION",
-    pillar: "exterior",
-    year: "2024",
-    location: "Kasaragod, Kerala",
-    area: "Civil Execution",
-    scope: "Structural Engineering & Quality Concrete",
-    image: "/exterior/IMG_4031.JPG.jpeg",
-    description: "High-precision on-site reinforced concrete beam alignment, column shuttering, solid block masonry, and multi-layer waterproofing.",
-    tags: ["RCC Slab", "Site Engineering", "Civil Quality"]
-  }
-];
+import { allProjectsData } from '../data/allProjectsData';
+export { allProjectsData };
 
-const categories = ["ALL", "ARCHITECTURE", "INTERIOR", "CONSTRUCTION"];
+const categories = ["ALL", "ARCHITECTURE", "INTERIOR", "CONSTRUCTION", "KEY HANDOVER"];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState("grid"); // "grid" | "list"
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -199,6 +51,31 @@ const Projects = () => {
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
+
+  // Keyboard navigation & body scroll lock for Lightbox
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") {
+          setLightboxIndex(null);
+        } else if (e.key === "ArrowRight") {
+          setLightboxIndex((prev) => (prev !== null ? (prev + 1) % filteredProjects.length : null));
+        } else if (e.key === "ArrowLeft") {
+          setLightboxIndex((prev) => (prev !== null ? (prev - 1 + filteredProjects.length) % filteredProjects.length : null));
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [lightboxIndex, filteredProjects.length]);
+
+  const currentProject = lightboxIndex !== null ? filteredProjects[lightboxIndex] : null;
 
   return (
     <PageTransition>
@@ -353,27 +230,30 @@ const Projects = () => {
                   animate="visible"
                   exit={{ opacity: 0 }}
                 >
-                  {filteredProjects.map((project) => (
+                  {filteredProjects.map((project, pIndex) => (
                     <motion.div 
                       key={project.id} 
-                      variants={fadeUpStaggerVariant}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-20px" }}
+                      transition={{ duration: 0.3 }}
                       className="group flex flex-col"
                     >
-                      <Link
-                        to={`/projects/${project.id}`}
-                        className="flex flex-col h-full bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-brand-blue/10 hover:border-brand-blue/30 shadow-[0_2px_12px_rgba(35,55,119,0.04)] hover:shadow-[0_12px_32px_rgba(35,55,119,0.08)] transition-all duration-500"
-                      >
-                        {/* Image Canvas */}
-                        <div className="relative aspect-[16/11] overflow-hidden bg-brand-gray">
+                      <div className="flex flex-col h-full bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-brand-blue/10 hover:border-brand-blue/30 shadow-[0_2px_12px_rgba(35,55,119,0.04)] hover:shadow-[0_12px_32px_rgba(35,55,119,0.08)] transition-all duration-500">
+                        {/* Image Canvas with Click to Zoom */}
+                        <div 
+                          onClick={() => setLightboxIndex(pIndex)}
+                          className="relative aspect-[16/11] overflow-hidden bg-brand-gray cursor-pointer group/img"
+                        >
                           <img
                             src={project.image}
                             alt={project.name}
                             loading="lazy"
-                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                            className="w-full h-full object-cover transform group-hover/img:scale-105 transition-transform duration-700 ease-out"
                           />
                           
                           {/* Dark subtle gradient on hover */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
 
                           {/* Index Badge */}
                           <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-brand-blue/10 text-[10px] font-mono font-semibold text-brand-blue shadow-sm">
@@ -385,19 +265,20 @@ const Projects = () => {
                             {project.category}
                           </div>
 
-                          {/* Floating Arrow on Hover */}
-                          <div className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-md">
-                            <ArrowUpRight size={18} />
+                          {/* Zoom Icon on Hover */}
+                          <div className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center opacity-0 group-hover/img:opacity-100 transform translate-y-2 group-hover/img:translate-y-0 transition-all duration-300 shadow-md">
+                            <Maximize2 size={16} />
                           </div>
                         </div>
 
                         {/* Project Details */}
                         <div className="p-6 md:p-7 flex-1 flex flex-col justify-between">
                           <div>
-                            {/* Meta row: Scope & Year */}
+                            {/* Meta row: Location & Year */}
                             <div className="flex items-center justify-between text-xs text-brand-blue/60 font-light mb-2.5">
-                              <span className="text-[11px] font-mono uppercase tracking-wider text-brand-red">
-                                {project.category}
+                              <span className="text-[11px] font-mono uppercase tracking-wider text-brand-red flex items-center gap-1">
+                                <MapPin size={12} />
+                                {project.location}
                               </span>
                               <span className="font-mono text-[11px] shrink-0 text-brand-blue/50">
                                 {project.year}
@@ -405,14 +286,23 @@ const Projects = () => {
                             </div>
 
                             {/* Project Name */}
-                            <h3 className="text-xl md:text-2xl font-display font-semibold text-brand-blue group-hover:text-brand-red transition-colors duration-200 mb-2.5 leading-snug">
+                            <h3 className="text-xl md:text-2xl font-display font-semibold text-brand-blue mb-2.5 leading-snug">
                               {project.name}
                             </h3>
 
                             {/* Concise Architecture Summary */}
-                            <p className="text-xs md:text-sm font-light text-brand-blue/70 line-clamp-2 leading-relaxed mb-5">
+                            <p className="text-xs md:text-sm font-light text-brand-blue/70 line-clamp-2 leading-relaxed mb-4">
                               {project.description}
                             </p>
+
+                            {/* Tags */}
+                            <div className="flex flex-wrap gap-1.5 mb-5">
+                              {project.tags.map((tag, tIdx) => (
+                                <span key={tIdx} className="text-[10px] px-2.5 py-1 rounded-md bg-brand-gray-light text-brand-blue/70 font-medium">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
                           </div>
 
                           {/* Minimal Footer */}
@@ -420,13 +310,27 @@ const Projects = () => {
                             <span className="text-[11px] font-light text-brand-blue/60">
                               {project.scope}
                             </span>
-                            <span className="inline-flex items-center gap-1 font-semibold text-[11px] tracking-wider uppercase text-brand-blue group-hover:text-brand-red transition-colors">
-                              <span>Explore</span>
-                              <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
-                            </span>
+                            <div className="flex items-center gap-3">
+                              <button
+                                type="button"
+                                onClick={() => setLightboxIndex(pIndex)}
+                                className="inline-flex items-center gap-1 font-semibold text-[11px] tracking-wider uppercase text-brand-blue hover:text-brand-red transition-colors cursor-pointer"
+                              >
+                                <span>Preview</span>
+                                <Maximize2 size={12} />
+                              </button>
+                              <span className="text-brand-blue/20">·</span>
+                              <Link
+                                to="/contact"
+                                className="inline-flex items-center gap-1 font-semibold text-[11px] tracking-wider uppercase text-brand-blue hover:text-brand-red transition-colors"
+                              >
+                                <span>Inquire</span>
+                                <ArrowRight size={12} />
+                              </Link>
+                            </div>
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -446,27 +350,29 @@ const Projects = () => {
                     <span className="col-span-5">Project / Work</span>
                     <span className="col-span-3">Typology</span>
                     <span className="col-span-2">Year</span>
-                    <span className="col-span-1 text-right">View</span>
+                    <span className="col-span-1 text-right">Preview</span>
                   </div>
 
                   <div className="divide-y divide-brand-blue/10">
-                    {filteredProjects.map((project) => (
-                      <Link
+                    {filteredProjects.map((project, pIndex) => (
+                      <div
                         key={project.id}
-                        to={`/projects/${project.id}`}
                         className="group grid grid-cols-1 lg:grid-cols-12 gap-4 items-center px-6 lg:px-8 py-5 hover:bg-[#FAFBFF] transition-colors"
                       >
                         {/* Monospace Index */}
-                        <div className="hidden lg:block col-span-1 font-mono text-xs text-brand-blue/40 group-hover:text-brand-red transition-colors">
+                        <div className="hidden lg:block col-span-1 font-mono text-xs text-brand-blue/40">
                           {project.number}
                         </div>
 
                         {/* Title & Preview Thumbnail */}
-                        <div className="col-span-1 lg:col-span-5 flex items-center gap-4">
+                        <div 
+                          onClick={() => setLightboxIndex(pIndex)}
+                          className="col-span-1 lg:col-span-5 flex items-center gap-4 cursor-pointer"
+                        >
                           <img 
                             src={project.image} 
                             alt={project.name}
-                            className="w-12 h-12 rounded-xl object-cover shrink-0 border border-brand-blue/10"
+                            className="w-12 h-12 rounded-xl object-cover shrink-0 border border-brand-blue/10 hover:opacity-90 transition-opacity"
                           />
                           <div>
                             <h3 className="font-display font-semibold text-base md:text-lg text-brand-blue group-hover:text-brand-red transition-colors">
@@ -490,13 +396,18 @@ const Projects = () => {
                           {project.year}
                         </div>
 
-                        {/* Action Arrow */}
+                        {/* Action Preview */}
                         <div className="col-span-1 flex justify-end">
-                          <div className="w-8 h-8 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 group-hover:bg-brand-red group-hover:border-brand-red group-hover:text-white transition-all">
-                            <ArrowUpRight size={14} />
-                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setLightboxIndex(pIndex)}
+                            className="w-8 h-8 rounded-full border border-brand-blue/15 flex items-center justify-center text-brand-blue/60 hover:bg-brand-red hover:border-brand-red hover:text-white transition-all cursor-pointer"
+                            title="Preview Image"
+                          >
+                            <Maximize2 size={13} />
+                          </button>
                         </div>
-                      </Link>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -505,6 +416,133 @@ const Projects = () => {
 
           </div>
         </section>
+
+        {/* Fullscreen Lightbox Portal mounted to document.body */}
+        {typeof document !== 'undefined' && createPortal(
+          <AnimatePresence>
+            {currentProject && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setLightboxIndex(null)}
+                className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-md flex flex-col items-center justify-between p-4 sm:p-8 select-none"
+              >
+                {/* Header Strip */}
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full max-w-6xl flex items-center justify-between text-white pb-4 border-b border-white/15 relative z-10"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-mono tracking-widest text-brand-red uppercase font-semibold">
+                      {currentProject.number} / {String(filteredProjects.length).padStart(2, '0')}
+                    </span>
+                    <span className="text-white/30">·</span>
+                    <span className="text-xs font-semibold text-white/90">
+                      {currentProject.name}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <Link
+                      to="/contact"
+                      onClick={() => setLightboxIndex(null)}
+                      className="hidden sm:inline-flex px-5 py-2 bg-brand-red hover:bg-brand-red-dark text-white text-xs font-semibold tracking-wider uppercase rounded-full transition-colors"
+                    >
+                      Inquire Project
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={() => setLightboxIndex(null)}
+                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
+                      aria-label="Close modal (Esc)"
+                    >
+                      <X size={22} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Center Canvas with Prev/Next Navigation */}
+                <div 
+                  className="relative flex-1 w-full max-w-6xl flex items-center justify-center my-auto py-4 overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Prev Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIndex((prev) => (prev !== null ? (prev - 1 + filteredProjects.length) % filteredProjects.length : 0));
+                    }}
+                    className="absolute left-2 sm:left-4 z-20 w-12 h-12 rounded-full bg-black/60 hover:bg-white/20 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-xl"
+                    aria-label="Previous project"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+
+                  {/* Main Large Image */}
+                  <motion.img
+                    key={currentProject.id}
+                    src={currentProject.image}
+                    alt={currentProject.name}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.2 }}
+                    className="max-h-[68vh] sm:max-h-[72vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl border border-white/10"
+                  />
+
+                  {/* Next Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIndex((prev) => (prev !== null ? (prev + 1) % filteredProjects.length : 0));
+                    }}
+                    className="absolute right-2 sm:right-4 z-20 w-12 h-12 rounded-full bg-black/60 hover:bg-white/20 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-xl"
+                    aria-label="Next project"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+
+                {/* Footer Details */}
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full max-w-6xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-white pt-4 border-t border-white/15 relative z-10"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-xs text-white/70">
+                      <span className="font-semibold text-brand-red uppercase tracking-wider">{currentProject.category}</span>
+                      <span>·</span>
+                      <span>{currentProject.location}</span>
+                      <span>·</span>
+                      <span>{currentProject.year}</span>
+                      <span>·</span>
+                      <span className="font-light">{currentProject.scope}</span>
+                    </div>
+                    <p className="text-xs text-white/60 font-light max-w-2xl line-clamp-1 sm:line-clamp-2">
+                      {currentProject.description}
+                    </p>
+                  </div>
+
+                  <div className="flex sm:hidden w-full">
+                    <Link
+                      to="/contact"
+                      onClick={() => setLightboxIndex(null)}
+                      className="w-full text-center py-2.5 bg-brand-red text-white text-xs font-semibold tracking-wider uppercase rounded-full"
+                    >
+                      Inquire Project
+                    </Link>
+                  </div>
+                </div>
+
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
 
         {/* Minimal Bottom Invitation */}
         <section className="py-20 px-6 md:px-12 border-t border-brand-blue/10 bg-white">

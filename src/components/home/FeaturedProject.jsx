@@ -77,10 +77,10 @@ const FeaturedProject = () => {
             </div>
 
             <Link
-              to="/projects/1"
+              to="/projects"
               className="flex-shrink-0 inline-flex items-center gap-3 bg-white hover:bg-brand-red text-brand-blue hover:text-white px-8 py-4 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-glass"
             >
-              <span>Explore Case Study</span>
+              <span>View All Projects</span>
               <ArrowUpRight size={16} />
             </Link>
 

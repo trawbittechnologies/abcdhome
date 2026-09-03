@@ -34,7 +34,7 @@ const About = () => {
               variants={imageReveal}
             >
               <img 
-                src="/exterior/kbr.png" 
+                src="/exterior/image1.png" 
                 alt="ABCD Contemporary Architecture"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />

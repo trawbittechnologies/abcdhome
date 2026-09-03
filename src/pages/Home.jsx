@@ -23,7 +23,8 @@ const Home = () => {
   // Subtle fade & text parallax as the content layer scrolls over it
   const heroTextOpacity = useTransform(scrollY, [0, 450], [1, 0.2]);
   const heroTextY = useTransform(scrollY, [0, 450], [0, -35]);
-  const videoOverlayOpacity = useTransform(scrollY, [0, 600], [0.65, 0.85]);
+  const heroImageScale = useTransform(scrollY, [0, 600], [1.02, 1.12]);
+  const imageOverlayOpacity = useTransform(scrollY, [0, 600], [0.55, 0.8]);
 
   return (
     <PageTransition>
@@ -33,26 +34,24 @@ const Home = () => {
           ref={heroRef}
           className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden z-0"
         >
-          {/* Full-bleed Video Background */}
+          {/* Full-bleed Architectural Hero Image Background */}
           <div className="absolute inset-0 z-0 overflow-hidden bg-brand-black">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              preload="auto"
-              disablePictureInPicture
-              className="w-full h-full object-cover scale-105"
-            >
-              <source src="/Transform_video_into_architectur…_202609011258.mp4" type="video/mp4" />
-            </video>
-            {/* 65% Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-black/65 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/45 pointer-events-none" />
+            <motion.img 
+              src="/exterior/kbr.png"
+              alt="ABCD Studio Contemporary Architecture"
+              style={{ scale: heroImageScale }}
+              className="w-full h-full object-cover object-center transform will-change-transform"
+              loading="eager"
+              fetchPriority="high"
+            />
+            {/* Multilayered Cinematic Architectural Dark Gradient Overlays */}
+            <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/60 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent pointer-events-none" />
             
             {/* Dynamic scroll dimming overlay */}
             <motion.div 
-              style={{ opacity: videoOverlayOpacity }}
+              style={{ opacity: imageOverlayOpacity }}
               className="absolute inset-0 bg-black/40 pointer-events-none"
             />
           </div>
