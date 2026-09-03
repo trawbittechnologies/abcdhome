@@ -135,9 +135,9 @@ const Contact = () => {
                     <Phone size={22} />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Call / WhatsApp</h3>
-                    <a href="tel:+910000000000" className="text-sm font-medium text-brand-blue hover:text-brand-red transition-colors block">
-                      +91 (0) 000 000 0000
+                    <h3 className="text-xs font-bold tracking-wider uppercase text-brand-blue mb-1">Direct Phone Call</h3>
+                    <a href="tel:+917902519430" className="text-sm font-medium text-brand-blue hover:text-brand-red transition-colors block font-mono">
+                      +91 79025 19430
                     </a>
                     <span className="text-xs font-light text-brand-blue/50">Mon – Sat from 9:00 AM – 6:00 PM</span>
                   </div>
@@ -146,13 +146,13 @@ const Contact = () => {
 
               {/* Quick WhatsApp Action */}
               <a
-                href="https://wa.me/"
+                href="https://wa.me/917902619430?text=Hello%20ABCD%20Studio%2C%20I%20would%20like%20to%20inquire%20about%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-7 py-3.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all shadow-sm"
               >
                 <MessageSquare size={16} />
-                <span>Chat Instantly on WhatsApp</span>
+                <span>Chat on WhatsApp (+91 79026 19430)</span>
               </a>
             </div>
 

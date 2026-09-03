@@ -89,7 +89,7 @@ const Footer = () => {
           <div className="flex items-center gap-6 text-xs font-semibold tracking-[0.15em] uppercase text-brand-blue/50">
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">Instagram</a>
             <span className="text-brand-blue/20">/</span>
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">WhatsApp</a>
+            <a href="https://wa.me/917902619430" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">WhatsApp</a>
             <span className="text-brand-blue/20">/</span>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">LinkedIn</a>
           </div>
