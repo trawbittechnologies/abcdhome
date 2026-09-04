@@ -14,7 +14,7 @@ const AdvancedReelCard = memo(({
   const videoRef = useRef(null);
   const cardRef = useRef(null);
   const progressBarRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showPulse, setShowPulse] = useState(false);
 
   // 3D Parallax Tilt Values
@@ -134,11 +134,10 @@ const AdvancedReelCard = memo(({
         ref={videoRef}
         src={reel.videoUrl}
         poster={reel.poster}
-        autoPlay
         loop
         muted={isGlobalMuted}
         playsInline
-        preload="metadata"
+        preload="none"
         onTimeUpdate={handleTimeUpdate}
         className="w-full h-full object-cover scale-[1.02] group-hover:scale-108 transition-transform duration-700 ease-out"
       />
