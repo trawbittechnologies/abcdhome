@@ -19,10 +19,6 @@ const Gallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // Filtered items
   const filteredItems = useMemo(() => {
     return allGalleryItems.filter(item => {
@@ -191,6 +187,7 @@ const Gallery = () => {
                         src={item.src}
                         alt={item.title}
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -13,10 +13,6 @@ import Practice from '../components/home/Practice';
 import ContactCTA from '../components/home/ContactCTA';
 
 const Home = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
 

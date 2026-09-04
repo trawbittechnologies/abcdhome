@@ -47,6 +47,8 @@ const FeaturedProject = () => {
             <img
               src="/exterior/kbr.png"
               alt="KBR Contemporary Residence by ABCD Home"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
             />
           </motion.div>

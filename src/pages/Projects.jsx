@@ -33,10 +33,6 @@ const Projects = () => {
   const [viewMode, setViewMode] = useState("grid"); // "grid" | "list"
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // Filtered dataset based on category & search query
   const filteredProjects = useMemo(() => {
     return allProjectsData.filter((project) => {

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight, Compass, Home as HomeIcon, Hammer, ShieldCheck, Clock, Sparkles } from 'lucide-react';
@@ -55,10 +54,6 @@ const simpleWorkflow = [
 ];
 
 const Services = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#FAFBFF] text-brand-blue selection:bg-brand-red selection:text-white">

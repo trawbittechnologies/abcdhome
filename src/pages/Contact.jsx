@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, ArrowUpRight, CheckCircle2, MessageSquare, Send } from 'lucide-react';
 import PageTransition from '../components/layout/PageTransition';
@@ -20,10 +20,6 @@ const Contact = () => {
   });
 
   const [status, setStatus] = useState('idle');
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

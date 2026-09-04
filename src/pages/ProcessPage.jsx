@@ -92,17 +92,16 @@ const constructionPillars = [
 ];
 
 const ProcessPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#FAFBFF] text-brand-blue selection:bg-brand-red selection:text-white">
 
         {/* Editorial Minimal Header */}
-        <section className="pt-36 md:pt-44 pb-14 md:pb-18 px-6 md:px-12 border-b border-brand-blue/10 bg-gradient-to-b from-white via-white to-[#FAFBFF]">
-          <div className="max-w-7xl mx-auto">
+        <section className="pt-36 md:pt-44 pb-14 md:pb-18 px-6 md:px-12 border-b border-brand-blue/10 bg-gradient-to-b from-white via-white to-[#FAFBFF] relative overflow-hidden">
+          {/* Subtle architectural dot grid background */}
+          <div className="absolute inset-0 bg-[radial-gradient(#233777_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto relative z-10">
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
               <motion.div
@@ -111,6 +110,11 @@ const ProcessPage = () => {
                 initial="hidden"
                 animate="visible"
               >
+                <motion.div className="flex items-center space-x-3 mb-5">
+                  <div className="h-[1px] w-8 bg-brand-red" />
+                  <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red">Turnkey Methodology</span>
+                </motion.div>
+
                 <motion.h1
                   className="text-4xl sm:text-6xl md:text-7xl font-display font-semibold tracking-tight text-brand-blue leading-[1.05]"
                   variants={textRevealChild}
@@ -124,17 +128,17 @@ const ProcessPage = () => {
                 className="lg:col-span-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.25 }}
               >
-                <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-4">
+                <p className="text-sm md:text-base font-light text-brand-blue/70 leading-relaxed mb-5">
                   How we construct your home step by step—combining structural engineering, daily supervision, and handcrafted teak woodwork under one accountable team.
                 </p>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-brand-red hover:underline"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-brand-red hover:text-brand-blue transition-colors group"
                 >
                   <span>Start with Step 01</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             </div>
@@ -147,7 +151,7 @@ const ProcessPage = () => {
           <div className="max-w-4xl mx-auto relative">
 
             {/* Structural Axis Line (Continuous vertical connecting line) */}
-            <div className="absolute left-6 md:left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-red via-brand-blue/25 to-brand-red" />
+            <div className="absolute left-6 md:left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-red via-brand-blue/25 to-brand-red pointer-events-none" />
 
             <div className="space-y-12 md:space-y-16 relative z-10">
               {constructionMilestones.map((milestone, idx) => {
@@ -156,11 +160,11 @@ const ProcessPage = () => {
                 return (
                   <motion.div
                     key={milestone.step}
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.45, delay: idx * 0.04 }}
-                    className="relative pl-16 md:pl-20"
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.4, delay: idx * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative pl-16 md:pl-20 will-change-transform"
                   >
                     {/* Structural Node Pin */}
                     <div className="absolute left-0 top-1.5 w-12 md:w-16 flex items-center justify-center">
@@ -239,13 +243,13 @@ const ProcessPage = () => {
               {constructionPillars.map((item) => (
                 <div
                   key={item.num}
-                  className="p-8 rounded-3xl bg-[#FAFBFF] border border-brand-blue/10 flex flex-col justify-between shadow-sm"
+                  className="group p-8 sm:p-9 rounded-3xl bg-[#FAFBFF] border border-brand-blue/10 hover:border-brand-blue/30 flex flex-col justify-between shadow-sm hover:shadow-[0_12px_32px_rgba(35,55,119,0.06)] transition-all duration-300"
                 >
                   <div>
                     <span className="text-xs font-mono font-semibold text-brand-red block mb-3">
                       {item.num}
                     </span>
-                    <h3 className="text-xl font-display font-semibold text-brand-blue mb-3">
+                    <h3 className="text-xl font-display font-semibold text-brand-blue mb-3 group-hover:text-brand-red transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-sm font-light text-brand-blue/70 leading-relaxed">
