@@ -51,7 +51,7 @@ const AdvancedReelCard = memo(({
     }
   }, [isGlobalMuted]);
 
-  // Viewport Autoplay
+  // Viewport Autoplay - only load and play when scrolled near viewport
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -59,12 +59,14 @@ const AdvancedReelCard = memo(({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.preload = "auto";
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
         } else {
           video.pause();
+          setIsPlaying(false);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15, rootMargin: "80px" }
     );
 
     if (cardRef.current) {

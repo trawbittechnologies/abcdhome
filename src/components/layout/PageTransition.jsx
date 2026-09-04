@@ -8,6 +8,7 @@ const PageTransition = ({ children }) => {
       initial="hidden"
       animate="visible"
       exit="exit"
+      className="will-change-opacity"
     >
       {children}
     </motion.div>

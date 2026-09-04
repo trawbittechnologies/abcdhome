@@ -89,17 +89,24 @@ export const imageReveal = {
 };
 
 export const blockReveal = {
-  hidden: { opacity: 0, filter: "blur(5px)" },
+  hidden: { opacity: 0, y: 12 },
   visible: { 
     opacity: 1,
-    filter: "blur(0px)",
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
-// Page transition
+// Page transition - Clean GPU-accelerated fade without costly blur rasterization
 export const pageTransition = {
-  hidden: { opacity: 0, filter: "blur(5px)" },
-  visible: { opacity: 1, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
-  exit: { opacity: 0, filter: "blur(5px)", transition: { duration: 0.6, ease: "easeIn" } }
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } 
+  },
+  exit: { 
+    opacity: 0, 
+    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } 
+  }
 };
+

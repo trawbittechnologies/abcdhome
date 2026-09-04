@@ -1,7 +1,8 @@
-import { useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState, lazy, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/layout/Layout';
+import ScrollToTop from './components/layout/ScrollToTop';
 import LoadingScreen from './components/layout/LoadingScreen';
 import Home from './pages/Home';
 
@@ -13,20 +14,51 @@ const ProcessPage = lazy(() => import('./pages/ProcessPage'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 
-// Fallback loader for secondary route transitions
-const RouteSuspenseFallback = () => (
-  <div className="min-h-screen bg-[#FAFBFF] flex items-center justify-center">
-    <div className="w-8 h-8 rounded-full border-2 border-brand-blue/20 border-t-brand-red animate-spin" />
-  </div>
-);
+function App() {
+  const [isLoading, setIsLoading] = useState(() => {
+    // Show cinematic intro once per session, instant for subsequent navigations
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      return !sessionStorage.getItem('abcd_intro_shown');
+    }
+    return true;
+  });
 
-const AnimatedRoutes = () => {
-  const location = useLocation();
+  const handleLoadingComplete = () => {
+    try {
+      sessionStorage.setItem('abcd_intro_shown', 'true');
+    } catch {}
+    setIsLoading(false);
+  };
+
+  // Prefetch secondary route chunks in idle time for instantaneous route switching
+  useEffect(() => {
+    const prefetchRoutes = () => {
+      import('./pages/Projects');
+      import('./pages/Services');
+      import('./pages/About');
+      import('./pages/ProcessPage');
+      import('./pages/Gallery');
+      import('./pages/Contact');
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(prefetchRoutes);
+    } else {
+      setTimeout(prefetchRoutes, 1800);
+    }
+  }, []);
 
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<RouteSuspenseFallback />}>
-        <Routes location={location} key={location.pathname}>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen key="site-loader" onComplete={handleLoadingComplete} />
+        )}
+      </AnimatePresence>
+
+      <Router>
+        <ScrollToTop />
+        <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="projects" element={<Projects />} />
@@ -37,26 +69,10 @@ const AnimatedRoutes = () => {
             <Route path="contact" element={<Contact />} />
           </Route>
         </Routes>
-      </Suspense>
-    </AnimatePresence>
-  );
-};
-
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  return (
-    <>
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <LoadingScreen key="site-loader" onComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
-      <Router>
-        <AnimatedRoutes />
       </Router>
     </>
   );
 }
 
 export default App;
+
