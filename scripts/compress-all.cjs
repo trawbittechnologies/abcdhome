@@ -17,17 +17,11 @@ async function getAllImages(dir) {
 }
 
 async function compressImage(filePath) {
-  // Read into memory buffer first so Windows never locks file descriptor
   const inputBuffer = fs.readFileSync(filePath);
   const originalSize = inputBuffer.length;
 
-  // Skip tiny icons/favicons under 40KB
-  if (originalSize < 40 * 1024) {
-    return { path: filePath, originalSize, newSize: originalSize, skipped: true };
-  }
-
-  // Preserve the exact transparent logo file
-  if (filePath.includes('abcd(logo)final')) {
+  // Skip tiny icons under 5KB
+  if (originalSize < 5 * 1024) {
     return { path: filePath, originalSize, newSize: originalSize, skipped: true };
   }
 
@@ -35,9 +29,28 @@ async function compressImage(filePath) {
 
   try {
     const image = sharp(inputBuffer);
-    const metadata = await image.metadata();
 
-    // Cap max dimension to 2048px (ultra-crisp 4K retina clarity)
+    // If it's the brand logo, optimize with 100% lossless PNG compression (preserves full alpha)
+    if (filePath.includes('abcd(logo)final')) {
+      const logoBuffer = await image
+        .png({
+          compressionLevel: 9,
+          effort: 9
+        })
+        .toBuffer();
+
+      if (logoBuffer.length < originalSize) {
+        fs.writeFileSync(filePath, logoBuffer);
+        return {
+          path: filePath,
+          originalSize,
+          newSize: logoBuffer.length,
+          savedPercent: (((originalSize - logoBuffer.length) / originalSize) * 100).toFixed(1)
+        };
+      }
+      return { path: filePath, originalSize, newSize: originalSize, skipped: true };
+    }
+
     const pipeline = sharp(inputBuffer).resize({
       width: 2048,
       height: 2048,
@@ -48,13 +61,21 @@ async function compressImage(filePath) {
     let compressedBuffer;
 
     if (ext === '.jpg' || ext === '.jpeg') {
-      compressedBuffer = await pipeline
-        .jpeg({
-          quality: 84,
-          mozjpeg: true,
-          progressive: true
-        })
-        .toBuffer();
+      // Try quality 82 first, then 78 if original was already heavily compressed WhatsApp jpeg
+      for (const q of [82, 80, 78, 76]) {
+        const testBuf = await pipeline
+          .jpeg({
+            quality: q,
+            mozjpeg: true,
+            progressive: true
+          })
+          .toBuffer();
+
+        if (testBuf.length < originalSize) {
+          compressedBuffer = testBuf;
+          break;
+        }
+      }
     } else if (ext === '.png') {
       const stats = await image.stats();
       const hasRealAlpha = stats.channels[3] && stats.channels[3].min < 255;
@@ -63,16 +84,15 @@ async function compressImage(filePath) {
         compressedBuffer = await pipeline
           .png({
             compressionLevel: 9,
-            effort: 7
+            effort: 8
           })
           .toBuffer();
       } else {
-        // Solid architectural render: optimize with palette quantizing for massive savings
         compressedBuffer = await pipeline
           .png({
-            quality: 86,
+            quality: 85,
             compressionLevel: 9,
-            effort: 7,
+            effort: 8,
             palette: true
           })
           .toBuffer();
@@ -80,14 +100,13 @@ async function compressImage(filePath) {
     } else if (ext === '.webp') {
       compressedBuffer = await pipeline
         .webp({
-          quality: 85,
+          quality: 84,
           effort: 6
         })
         .toBuffer();
     }
 
     if (compressedBuffer && compressedBuffer.length < originalSize) {
-      // Overwrite safely
       fs.writeFileSync(filePath, compressedBuffer);
       return {
         path: filePath,
@@ -109,7 +128,7 @@ async function main() {
   console.log(`Scanning images in: ${targetDir}`);
 
   const files = await getAllImages(targetDir);
-  console.log(`Found ${files.length} images. Starting in-memory visually-lossless compression...\n`);
+  console.log(`Found ${files.length} images. Optimizing balance images...\n`);
 
   let totalOriginal = 0;
   let totalNew = 0;
@@ -125,11 +144,11 @@ async function main() {
 
     if (!result.skipped && !result.error) {
       optimizedCount++;
-      const origMB = (result.originalSize / 1024 / 1024).toFixed(2);
-      const newMB = (result.newSize / 1024 / 1024).toFixed(2);
-      console.log(`[${i + 1}/${files.length}] Optimized: ${rel} | ${origMB}MB -> ${newMB}MB (-${result.savedPercent}%)`);
+      const origKB = (result.originalSize / 1024).toFixed(1);
+      const newKB = (result.newSize / 1024).toFixed(1);
+      console.log(`[${i + 1}/${files.length}] Optimized: ${rel} | ${origKB}KB -> ${newKB}KB (-${result.savedPercent}%)`);
     } else {
-      console.log(`[${i + 1}/${files.length}] Kept: ${rel}`);
+      console.log(`[${i + 1}/${files.length}] Already optimal: ${rel}`);
     }
   }
 
@@ -140,10 +159,10 @@ async function main() {
 
   console.log('\n=============================================');
   console.log(`Total images processed: ${files.length}`);
-  console.log(`Images optimized:       ${optimizedCount}`);
+  console.log(`Images newly optimized: ${optimizedCount}`);
   console.log(`Original total size:    ${origTotalMB} MB`);
   console.log(`New total size:         ${newTotalMB} MB`);
-  console.log(`Total data saved:       ${totalSavedMB} MB (-${totalSavedPercent}%)`);
+  console.log(`Additional data saved:  ${totalSavedMB} MB (-${totalSavedPercent}%)`);
   console.log('=============================================');
 }
 
